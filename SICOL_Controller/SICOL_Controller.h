@@ -19,19 +19,43 @@ namespace SICOL_Controller {
 		List<Alumno^>^ QueryAllAlumnos();
 	};
 
+	public ref class SalonDB {
+	public:
+		List<Salon^>^ listSalones;
+	public:
+		void Add(Salon^ s);
+		void Update(Salon^ s);
+		void Delete(String^ name); // name =nombre salon
+		Salon^ QueryByCodigo(int codigo);
+		Salon^ QueryByNombre(String^ name);
+		List<Salon^>^ QueryAll();
+		List<Salon^>^ QueryAllByCapicidad(int capacidad);
+	};
+
+
 	public ref class SICOLManager {
 	private:
 		static AlumnoDB^ Alumnos = gcnew AlumnoDB();
-		//static GradoDB^ Grados = gcnew GradoDB();
+		static SalonDB^ salones = gcnew SalonDB();
 	public:
+		//Metodos Estaticos de para AlumnoDB 
 		void static AddAlumno(Alumno^ a);
 		void static UpdateAlumno(Alumno^ a);
 		void static DeleteAlumno(String^ name);
 		static Alumno^ QueryAlumnoByCodigo(int codigo);
 		static Alumno^ QueryAlumnoByDni(int dni);
-		static List<Alumno^>^ QueryAll();
+		static List<Alumno^>^ QueryAllAlumnos();
 		static void PersistToXMLFileAlumnoDB();
 		static void LoadFromXMLFileAlumnoDB();
+
+		//Metodos Estaticos de para AlumnoDB 
+		static void AddSalon(Salon^ s);
+		static void UpdateSalon(Salon^ s);
+		static void DeleteSalon(String^ name); // name =nombre salon
+		static Salon^ QuerySalonByCodigo(int codigo);
+		static Salon^ QuerySalonByNombre(String^ name);
+		static List<Salon^>^ QueryAllSalones();
+		static List<Salon^>^ QueryAllSalonesByCapicidad(int capacidad);
 	};
 
 	public ref class GradoManager {
