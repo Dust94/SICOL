@@ -357,8 +357,8 @@ void SalonDB::Add(Salon^ s){
 	p4->Value = s->tipo_Pizarra;
 	p5->Value = s->piso;
 	p6->Value = s->estado;
-	p7->Value = safe_cast<bool>(s->proyector);
-	p8->Value = safe_cast<bool>(s->wifi);
+	p7->Value = safe_cast<char>(s->proyector);
+	p8->Value = safe_cast<char>(s->wifi);
 
 	//Paso los Valores a la Base de Datos
 	comm->Parameters->Add(p1);
@@ -415,8 +415,8 @@ void SalonDB::Update(Salon^ s){
 	p4->Value = s->tipo_Pizarra;
 	p5->Value = s->piso;
 	p6->Value = s->estado;
-	p7->Value = safe_cast<bool>(s->proyector);
-	p8->Value = safe_cast<bool>(s->wifi);
+	p7->Value = safe_cast<char>(s->proyector);
+	p8->Value = safe_cast<char>(s->wifi);
 	p9->Value = s->id;
 
 	//Paso los Valores a la Base de Datos
@@ -493,9 +493,9 @@ Salon^ SalonDB::QueryByCodigo(int codigo){
 		if (dr["state"] != System::DBNull::Value)
 			s->estado = safe_cast<String^>(dr["state"]);
 		if (dr["hasMultimediaProyector"] != System::DBNull::Value)
-			s->proyector = safe_cast<bool>(dr["hasMultimediaProyector"]);
+			s->proyector = safe_cast<char>(dr["hasMultimediaProyector"]);
 		if (dr["hasWifi"] != System::DBNull::Value)
-			s->wifi = safe_cast<bool>(dr["hasWifi"]);
+			s->wifi = safe_cast<char>(dr["hasWifi"]);
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
 	dr->Close();
@@ -538,9 +538,9 @@ Salon^ SalonDB::QueryByNombre(String^ name){
 		if (dr["state"] != System::DBNull::Value)
 			s->estado = safe_cast<String^>(dr["state"]);
 		if (dr["hasMultimediaProyector"] != System::DBNull::Value)
-			s->proyector = safe_cast<bool>(dr["hasMultimediaProyector"]);
+			s->proyector = safe_cast<char>(dr["hasMultimediaProyector"]);
 		if (dr["hasWifi"] != System::DBNull::Value)
-			s->wifi = safe_cast<bool>(dr["hasWifi"]);
+			s->wifi = safe_cast<char>(dr["hasWifi"]);
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
 	dr->Close();
@@ -578,9 +578,9 @@ List<Salon^>^ SalonDB::QueryAll(){
 		if (dr["state"] != System::DBNull::Value)
 			s->estado = safe_cast<String^>(dr["state"]);
 		if (dr["hasMultimediaProyector"] != System::DBNull::Value)
-			s->proyector = safe_cast<bool>(dr["hasMultimediaProyector"]);
+			s->proyector = safe_cast<char>(dr["hasMultimediaProyector"]);
 		if (dr["hasWifi"] != System::DBNull::Value)
-			s->wifi = safe_cast<bool>(dr["hasWifi"]);
+			s->wifi = safe_cast<char>(dr["hasWifi"]);
 		SalonesList->Add(s);
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
@@ -624,9 +624,9 @@ List<Salon^>^ SalonDB::QueryAllByCapicidad(int capacidad){
 		if (dr["state"] != System::DBNull::Value)
 			s->estado = safe_cast<String^>(dr["state"]);
 		if (dr["hasMultimediaProyector"] != System::DBNull::Value)
-			s->proyector = safe_cast<bool>(dr["hasMultimediaProyector"]);
+			s->proyector = safe_cast<char>(dr["hasMultimediaProyector"]);
 		if (dr["hasWifi"] != System::DBNull::Value)
-			s->wifi = safe_cast<bool>(dr["hasWifi"]);
+			s->wifi = safe_cast<char>(dr["hasWifi"]);
 		SalonesList->Add(s);
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD

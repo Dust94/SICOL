@@ -105,6 +105,9 @@
     <EmbeddedResource Include="AlumnoForm.resx">
       <DependentUpon>AlumnoForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SalonForm.resx">
+      <DependentUpon>SalonForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SICOLForm.resx">
       <DependentUpon>SICOLForm.h</DependentUpon>
     </EmbeddedResource>

@@ -71,7 +71,7 @@ namespace SICOL_Library {
 		String^ tipo_Pizarra;
 		int piso; //1 piso , 2 piso	
 		String^ estado; //activo o inactivo
-		bool proyector; 
-		bool wifi;
+		char proyector; //Y,N
+		char wifi;
 	}; // Fin Clase Salon
 }
