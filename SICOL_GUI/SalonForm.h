@@ -321,28 +321,26 @@ private: System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  
 	String^ tipo_pizarra = combTipoPizarra->Text;
 	String^ piso = txtPiso->Text;
 	String^ estado = txtEstado->Text;
-
-	Salon^ s = gcnew Salon();
-	s->nombre = nombre;
-	s->tipo_Aula = tipo_Salon;
-	s->tipo_Pizarra = tipo_pizarra;
-		s->estado = estado;
-	if (ValidacionCapacidad(Int32::Parse(capacidad)))
-		s->capacidad = Int32::Parse(capacidad);
-	else MessageBox::Show("Dato de Capacidad Incorrecto");
-	if (ValidacionCapacidad(Int32::Parse(capacidad)))
-		s->piso = Int32::Parse(piso);
-	else MessageBox::Show("Dato de Piso Incorrecto");
-
-	if (rbtnProyector->Checked) s->proyector = 'Y';
-	else s->proyector = 'N';
-	if (rbtnWifi->Checked) s->wifi = 'Y';
-	else s->wifi = 'N';
-
-	if (s != nullptr) {
-		SICOLManager::AddSalon(s);
-		MessageBox::Show("Salon Incluido Correctamente");
-	}
+	int intcapacidad = Int32::Parse(capacidad);
+	int intpiso = Int32::Parse(piso);
+		
+	if (ValidacionCapacidad(intcapacidad) && ValidacionPiso(intpiso)){
+			Salon^ s = gcnew Salon();
+			s->nombre = nombre;
+			s->tipo_Aula = tipo_Salon;
+			s->tipo_Pizarra = tipo_pizarra;
+			s->estado = estado;
+			s->capacidad = intcapacidad;
+			s->piso = intpiso;
+			if (rbtnProyector->Checked) s->proyector = 'Y';
+			else s->proyector = 'N';
+			if (rbtnWifi->Checked) s->wifi = 'Y';
+			else s->wifi = 'N';
+			SICOLManager::AddSalon(s);
+			MessageBox::Show("Salon Incluido Correctamente");
+	}		
+	if (!ValidacionCapacidad(intcapacidad)) MessageBox::Show("Dato de Capacidad Incorrecto");
+	if (!ValidacionPiso(intpiso)) MessageBox::Show("Dato de Piso Incorrecto");
 }
 };
 }
