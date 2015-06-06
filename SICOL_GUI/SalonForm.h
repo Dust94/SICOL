@@ -300,6 +300,16 @@ namespace SICOL_GUI {
 
 		}
 #pragma endregion
+		bool ValidacionCapacidad(int capacidad){
+			if (capacidad <= 0) return false;
+			if (capacidad%10 !=0 ) return false;
+			return true;
+		}
+		bool ValidacionPiso(int piso){
+			if (piso <= 0) return false;
+			if (piso > 4) return false;
+			return true;
+		}
 	private: System::Void label4_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -312,15 +322,27 @@ private: System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  
 	String^ piso = txtPiso->Text;
 	String^ estado = txtEstado->Text;
 
-	Salon^ p = gcnew Salon();
-	p->nombre = nombre;
-	p->capacidad = Int32::Parse(capacidad);
-	p->tipo_Aula = tipo_Salon;
-	p->tipo_Pizarra = tipo_pizarra;
-	p->piso = Int32::Parse(piso);
-	p->estado = estado;
+	Salon^ s = gcnew Salon();
+	s->nombre = nombre;
+	s->tipo_Aula = tipo_Salon;
+	s->tipo_Pizarra = tipo_pizarra;
+		s->estado = estado;
+	if (ValidacionCapacidad(Int32::Parse(capacidad)))
+		s->capacidad = Int32::Parse(capacidad);
+	else MessageBox::Show("Dato de Capacidad Incorrecto");
+	if (ValidacionCapacidad(Int32::Parse(capacidad)))
+		s->piso = Int32::Parse(piso);
+	else MessageBox::Show("Dato de Piso Incorrecto");
 
+	if (rbtnProyector->Checked) s->proyector = 'Y';
+	else s->proyector = 'N';
+	if (rbtnWifi->Checked) s->wifi = 'Y';
+	else s->wifi = 'N';
 
+	if (s != nullptr) {
+		SICOLManager::AddSalon(s);
+		MessageBox::Show("Salon Incluido Correctamente");
+	}
 }
 };
 }
