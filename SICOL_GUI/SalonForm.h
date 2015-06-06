@@ -65,6 +65,16 @@ namespace SICOL_GUI {
 	private: System::Windows::Forms::Button^  btnDelete;
 	private: System::Windows::Forms::CheckBox^  cbProyector;
 	private: System::Windows::Forms::CheckBox^  cbWifi;
+	private: System::Windows::Forms::DataGridView^  dgvSalon;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  nombre;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  capacidad;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  tipo_salon;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  tipo_pizarra;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  piso;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  estado;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  proyector;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  wifi;
+	private: System::Windows::Forms::Button^  btnQueryAll;
 
 
 
@@ -101,6 +111,17 @@ namespace SICOL_GUI {
 			this->btnDelete = (gcnew System::Windows::Forms::Button());
 			this->cbProyector = (gcnew System::Windows::Forms::CheckBox());
 			this->cbWifi = (gcnew System::Windows::Forms::CheckBox());
+			this->dgvSalon = (gcnew System::Windows::Forms::DataGridView());
+			this->nombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->capacidad = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->tipo_salon = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->tipo_pizarra = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->piso = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->estado = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->proyector = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->wifi = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btnQueryAll = (gcnew System::Windows::Forms::Button());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvSalon))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -225,7 +246,7 @@ namespace SICOL_GUI {
 			// 
 			// btnAdd
 			// 
-			this->btnAdd->Location = System::Drawing::Point(187, 187);
+			this->btnAdd->Location = System::Drawing::Point(269, 187);
 			this->btnAdd->Name = L"btnAdd";
 			this->btnAdd->Size = System::Drawing::Size(75, 23);
 			this->btnAdd->TabIndex = 16;
@@ -235,7 +256,7 @@ namespace SICOL_GUI {
 			// 
 			// btnUpdate
 			// 
-			this->btnUpdate->Location = System::Drawing::Point(341, 187);
+			this->btnUpdate->Location = System::Drawing::Point(360, 187);
 			this->btnUpdate->Name = L"btnUpdate";
 			this->btnUpdate->Size = System::Drawing::Size(75, 23);
 			this->btnUpdate->TabIndex = 17;
@@ -244,7 +265,7 @@ namespace SICOL_GUI {
 			// 
 			// btnDelete
 			// 
-			this->btnDelete->Location = System::Drawing::Point(507, 187);
+			this->btnDelete->Location = System::Drawing::Point(462, 187);
 			this->btnDelete->Name = L"btnDelete";
 			this->btnDelete->Size = System::Drawing::Size(75, 23);
 			this->btnDelete->TabIndex = 18;
@@ -269,11 +290,82 @@ namespace SICOL_GUI {
 			this->cbWifi->TabIndex = 20;
 			this->cbWifi->UseVisualStyleBackColor = true;
 			// 
+			// dgvSalon
+			// 
+			this->dgvSalon->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dgvSalon->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
+				this->nombre, this->capacidad,
+					this->tipo_salon, this->tipo_pizarra, this->piso, this->estado, this->proyector, this->wifi
+			});
+			this->dgvSalon->Location = System::Drawing::Point(107, 239);
+			this->dgvSalon->Name = L"dgvSalon";
+			this->dgvSalon->Size = System::Drawing::Size(568, 152);
+			this->dgvSalon->TabIndex = 21;
+			// 
+			// nombre
+			// 
+			this->nombre->HeaderText = L"Nombre del Salon";
+			this->nombre->Name = L"nombre";
+			this->nombre->Width = 60;
+			// 
+			// capacidad
+			// 
+			this->capacidad->HeaderText = L"Capacidad Minima del Salon";
+			this->capacidad->Name = L"capacidad";
+			this->capacidad->Width = 80;
+			// 
+			// tipo_salon
+			// 
+			this->tipo_salon->HeaderText = L"Tipo de Salon";
+			this->tipo_salon->Name = L"tipo_salon";
+			this->tipo_salon->Width = 60;
+			// 
+			// tipo_pizarra
+			// 
+			this->tipo_pizarra->HeaderText = L"Tipo de Pizarra";
+			this->tipo_pizarra->Name = L"tipo_pizarra";
+			this->tipo_pizarra->Width = 60;
+			// 
+			// piso
+			// 
+			this->piso->HeaderText = L"Piso en el que se encuentra";
+			this->piso->Name = L"piso";
+			// 
+			// estado
+			// 
+			this->estado->HeaderText = L"Estado";
+			this->estado->Name = L"estado";
+			this->estado->Width = 50;
+			// 
+			// proyector
+			// 
+			this->proyector->HeaderText = L"Tiene Proyector";
+			this->proyector->Name = L"proyector";
+			this->proyector->Width = 60;
+			// 
+			// wifi
+			// 
+			this->wifi->HeaderText = L"Tiene Wifi";
+			this->wifi->Name = L"wifi";
+			this->wifi->Width = 60;
+			// 
+			// btnQueryAll
+			// 
+			this->btnQueryAll->Location = System::Drawing::Point(107, 210);
+			this->btnQueryAll->Name = L"btnQueryAll";
+			this->btnQueryAll->Size = System::Drawing::Size(75, 23);
+			this->btnQueryAll->TabIndex = 22;
+			this->btnQueryAll->Text = L"Salones";
+			this->btnQueryAll->UseVisualStyleBackColor = true;
+			this->btnQueryAll->Click += gcnew System::EventHandler(this, &SalonForm::btnQueryAll_Click);
+			// 
 			// SalonForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(792, 424);
+			this->Controls->Add(this->btnQueryAll);
+			this->Controls->Add(this->dgvSalon);
 			this->Controls->Add(this->cbWifi);
 			this->Controls->Add(this->cbProyector);
 			this->Controls->Add(this->btnDelete);
@@ -295,21 +387,42 @@ namespace SICOL_GUI {
 			this->Controls->Add(this->label1);
 			this->Name = L"SalonForm";
 			this->Text = L"SalonForm";
+			this->Load += gcnew System::EventHandler(this, &SalonForm::SalonForm_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvSalon))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-		bool ValidacionCapacidad(int capacidad){
-			if (capacidad <= 0) return false;
-			if (capacidad%10 !=0 ) return false;
-			return true;
+
+	public: void RefreshDGVPSalones(){
+		List<Salon^>^ salones = SICOLManager::QueryAllSalones();
+		dgvSalon->Rows->Clear();
+		for (int i = 0; i < salones->Count; i++){
+			dgvSalon->Rows->Add(gcnew array < String^ > {
+				"" + salones[i]->id,
+					salones[i]->nombre,
+					"" + salones[i]->capacidad,
+					salones[i]->tipo_Aula,
+					salones[i]->tipo_Pizarra,
+					"" + salones[i]->piso,
+					salones[i]->estado,
+					"" + salones[i]->proyector,
+					"" + salones[i]->wifi});
 		}
-		bool ValidacionPiso(int piso){
-			if (piso <= 0) return false;
-			if (piso > 4) return false;
-			return true;
-		}
+	}// Fin de Metodo RefreshDGVPSalones
+
+	public: bool ValidacionCapacidad(int capacidad){
+		if (capacidad <= 0) return false;
+		if (capacidad%10 !=0 ) return false;
+		return true;
+	}
+	public: bool ValidacionPiso(int piso){
+		if (piso <= 0) return false;
+		if (piso > 4) return false;
+		return true;
+	}
+
 	private: System::Void label4_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -347,6 +460,11 @@ private: System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  
 	}		
 	if (!ValidacionCapacidad(intcapacidad)) MessageBox::Show("Dato de Capacidad Incorrecto");
 	if (!ValidacionPiso(intpiso)) MessageBox::Show("Dato de Piso Incorrecto");
+}
+private: System::Void SalonForm_Load(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void btnQueryAll_Click(System::Object^  sender, System::EventArgs^  e) {
+	RefreshDGVPSalones();
 }
 };
 }

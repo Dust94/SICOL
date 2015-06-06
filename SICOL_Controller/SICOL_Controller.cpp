@@ -663,13 +663,27 @@ List<Alumno^>^ SICOLManager::QueryAllAlumnos(){
 	return Alumnos->QueryAllAlumnos();
 }
 
-void SICOLManager::AddSalon(Salon^ s){}
-void SICOLManager::UpdateSalon(Salon^ s){}
-void SICOLManager::DeleteSalon(String^ name){}
-Salon^ SICOLManager::QuerySalonByCodigo(int codigo){ return nullptr; }
-Salon^ SICOLManager::QuerySalonByNombre(String^ name){ return nullptr; }
-List<Salon^>^ SICOLManager::QueryAllSalones(){ return nullptr; }
-List<Salon^>^ SICOLManager::QueryAllSalonesByCapicidad(int capacidad){ return nullptr; }
+void SICOLManager::AddSalon(Salon^ s){
+	salones->Add(s);
+}
+void SICOLManager::UpdateSalon(Salon^ s){
+	salones->Update(s);
+}
+void SICOLManager::DeleteSalon(String^ name){
+	salones->Delete(name);
+}
+Salon^ SICOLManager::QuerySalonByCodigo(int codigo){ 
+	return salones->QueryByCodigo(codigo);
+}
+Salon^ SICOLManager::QuerySalonByNombre(String^ name){
+	return salones->QueryByNombre(name);
+}
+List<Salon^>^ SICOLManager::QueryAllSalones(){ 
+	return salones->QueryAll();
+}
+List<Salon^>^ SICOLManager::QueryAllSalonesByCapicidad(int capacidad){
+	return salones->QueryAllByCapicidad(capacidad);
+}
 
 
 
