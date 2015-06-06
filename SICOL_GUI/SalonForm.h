@@ -49,8 +49,8 @@ namespace SICOL_GUI {
 	private: System::Windows::Forms::Label^  label8;
 	private: System::Windows::Forms::ComboBox^  combTipoSalon;
 	private: System::Windows::Forms::ComboBox^  combTipoPizarra;
-	private: System::Windows::Forms::RadioButton^  rbtnProyector;
-	private: System::Windows::Forms::RadioButton^  rbtnWifi;
+
+
 
 
 
@@ -63,6 +63,8 @@ namespace SICOL_GUI {
 	private: System::Windows::Forms::Button^  btnAdd;
 	private: System::Windows::Forms::Button^  btnUpdate;
 	private: System::Windows::Forms::Button^  btnDelete;
+	private: System::Windows::Forms::CheckBox^  cbProyector;
+	private: System::Windows::Forms::CheckBox^  cbWifi;
 
 
 
@@ -90,8 +92,6 @@ namespace SICOL_GUI {
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->combTipoSalon = (gcnew System::Windows::Forms::ComboBox());
 			this->combTipoPizarra = (gcnew System::Windows::Forms::ComboBox());
-			this->rbtnProyector = (gcnew System::Windows::Forms::RadioButton());
-			this->rbtnWifi = (gcnew System::Windows::Forms::RadioButton());
 			this->txtNombre = (gcnew System::Windows::Forms::TextBox());
 			this->txtCapacidad = (gcnew System::Windows::Forms::TextBox());
 			this->txtPiso = (gcnew System::Windows::Forms::TextBox());
@@ -99,6 +99,8 @@ namespace SICOL_GUI {
 			this->btnAdd = (gcnew System::Windows::Forms::Button());
 			this->btnUpdate = (gcnew System::Windows::Forms::Button());
 			this->btnDelete = (gcnew System::Windows::Forms::Button());
+			this->cbProyector = (gcnew System::Windows::Forms::CheckBox());
+			this->cbWifi = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -131,7 +133,7 @@ namespace SICOL_GUI {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(50, 212);
+			this->label4->Location = System::Drawing::Point(402, 71);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(81, 13);
 			this->label4->TabIndex = 5;
@@ -141,7 +143,7 @@ namespace SICOL_GUI {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(50, 175);
+			this->label5->Location = System::Drawing::Point(402, 32);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(180, 13);
 			this->label5->TabIndex = 4;
@@ -159,7 +161,7 @@ namespace SICOL_GUI {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(50, 287);
+			this->label7->Location = System::Drawing::Point(402, 146);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(55, 13);
 			this->label7->TabIndex = 7;
@@ -168,7 +170,7 @@ namespace SICOL_GUI {
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(50, 249);
+			this->label8->Location = System::Drawing::Point(402, 105);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(135, 13);
 			this->label8->TabIndex = 6;
@@ -178,7 +180,7 @@ namespace SICOL_GUI {
 			// 
 			this->combTipoSalon->FormattingEnabled = true;
 			this->combTipoSalon->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Aula", L"Laboratorio" });
-			this->combTipoSalon->Location = System::Drawing::Point(265, 102);
+			this->combTipoSalon->Location = System::Drawing::Point(223, 97);
 			this->combTipoSalon->Name = L"combTipoSalon";
 			this->combTipoSalon->Size = System::Drawing::Size(121, 21);
 			this->combTipoSalon->TabIndex = 8;
@@ -188,62 +190,42 @@ namespace SICOL_GUI {
 			// 
 			this->combTipoPizarra->FormattingEnabled = true;
 			this->combTipoPizarra->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Acrilica", L"Para Tiza" });
-			this->combTipoPizarra->Location = System::Drawing::Point(265, 137);
+			this->combTipoPizarra->Location = System::Drawing::Point(223, 138);
 			this->combTipoPizarra->Name = L"combTipoPizarra";
 			this->combTipoPizarra->Size = System::Drawing::Size(121, 21);
 			this->combTipoPizarra->TabIndex = 9;
 			// 
-			// rbtnProyector
-			// 
-			this->rbtnProyector->AutoSize = true;
-			this->rbtnProyector->Location = System::Drawing::Point(228, 249);
-			this->rbtnProyector->Name = L"rbtnProyector";
-			this->rbtnProyector->Size = System::Drawing::Size(14, 13);
-			this->rbtnProyector->TabIndex = 10;
-			this->rbtnProyector->TabStop = true;
-			this->rbtnProyector->UseVisualStyleBackColor = true;
-			// 
-			// rbtnWifi
-			// 
-			this->rbtnWifi->AutoSize = true;
-			this->rbtnWifi->Location = System::Drawing::Point(228, 285);
-			this->rbtnWifi->Name = L"rbtnWifi";
-			this->rbtnWifi->Size = System::Drawing::Size(14, 13);
-			this->rbtnWifi->TabIndex = 11;
-			this->rbtnWifi->TabStop = true;
-			this->rbtnWifi->UseVisualStyleBackColor = true;
-			// 
 			// txtNombre
 			// 
-			this->txtNombre->Location = System::Drawing::Point(265, 24);
+			this->txtNombre->Location = System::Drawing::Point(223, 25);
 			this->txtNombre->Name = L"txtNombre";
 			this->txtNombre->Size = System::Drawing::Size(100, 20);
 			this->txtNombre->TabIndex = 12;
 			// 
 			// txtCapacidad
 			// 
-			this->txtCapacidad->Location = System::Drawing::Point(265, 64);
+			this->txtCapacidad->Location = System::Drawing::Point(223, 64);
 			this->txtCapacidad->Name = L"txtCapacidad";
 			this->txtCapacidad->Size = System::Drawing::Size(100, 20);
 			this->txtCapacidad->TabIndex = 13;
 			// 
 			// txtPiso
 			// 
-			this->txtPiso->Location = System::Drawing::Point(265, 172);
+			this->txtPiso->Location = System::Drawing::Point(617, 32);
 			this->txtPiso->Name = L"txtPiso";
 			this->txtPiso->Size = System::Drawing::Size(100, 20);
 			this->txtPiso->TabIndex = 14;
 			// 
 			// txtEstado
 			// 
-			this->txtEstado->Location = System::Drawing::Point(265, 209);
+			this->txtEstado->Location = System::Drawing::Point(617, 68);
 			this->txtEstado->Name = L"txtEstado";
 			this->txtEstado->Size = System::Drawing::Size(100, 20);
 			this->txtEstado->TabIndex = 15;
 			// 
 			// btnAdd
 			// 
-			this->btnAdd->Location = System::Drawing::Point(465, 22);
+			this->btnAdd->Location = System::Drawing::Point(187, 187);
 			this->btnAdd->Name = L"btnAdd";
 			this->btnAdd->Size = System::Drawing::Size(75, 23);
 			this->btnAdd->TabIndex = 16;
@@ -253,7 +235,7 @@ namespace SICOL_GUI {
 			// 
 			// btnUpdate
 			// 
-			this->btnUpdate->Location = System::Drawing::Point(465, 78);
+			this->btnUpdate->Location = System::Drawing::Point(341, 187);
 			this->btnUpdate->Name = L"btnUpdate";
 			this->btnUpdate->Size = System::Drawing::Size(75, 23);
 			this->btnUpdate->TabIndex = 17;
@@ -262,18 +244,38 @@ namespace SICOL_GUI {
 			// 
 			// btnDelete
 			// 
-			this->btnDelete->Location = System::Drawing::Point(48, 358);
+			this->btnDelete->Location = System::Drawing::Point(507, 187);
 			this->btnDelete->Name = L"btnDelete";
 			this->btnDelete->Size = System::Drawing::Size(75, 23);
 			this->btnDelete->TabIndex = 18;
 			this->btnDelete->Text = L"Eliminar";
 			this->btnDelete->UseVisualStyleBackColor = true;
 			// 
+			// cbProyector
+			// 
+			this->cbProyector->AutoSize = true;
+			this->cbProyector->Location = System::Drawing::Point(617, 105);
+			this->cbProyector->Name = L"cbProyector";
+			this->cbProyector->Size = System::Drawing::Size(15, 14);
+			this->cbProyector->TabIndex = 19;
+			this->cbProyector->UseVisualStyleBackColor = true;
+			// 
+			// cbWifi
+			// 
+			this->cbWifi->AutoSize = true;
+			this->cbWifi->Location = System::Drawing::Point(617, 146);
+			this->cbWifi->Name = L"cbWifi";
+			this->cbWifi->Size = System::Drawing::Size(15, 14);
+			this->cbWifi->TabIndex = 20;
+			this->cbWifi->UseVisualStyleBackColor = true;
+			// 
 			// SalonForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(720, 420);
+			this->ClientSize = System::Drawing::Size(792, 424);
+			this->Controls->Add(this->cbWifi);
+			this->Controls->Add(this->cbProyector);
 			this->Controls->Add(this->btnDelete);
 			this->Controls->Add(this->btnUpdate);
 			this->Controls->Add(this->btnAdd);
@@ -281,8 +283,6 @@ namespace SICOL_GUI {
 			this->Controls->Add(this->txtPiso);
 			this->Controls->Add(this->txtCapacidad);
 			this->Controls->Add(this->txtNombre);
-			this->Controls->Add(this->rbtnWifi);
-			this->Controls->Add(this->rbtnProyector);
 			this->Controls->Add(this->combTipoPizarra);
 			this->Controls->Add(this->combTipoSalon);
 			this->Controls->Add(this->label7);
@@ -323,18 +323,24 @@ private: System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  
 	String^ estado = txtEstado->Text;
 	int intcapacidad = Int32::Parse(capacidad);
 	int intpiso = Int32::Parse(piso);
-		
+
 	if (ValidacionCapacidad(intcapacidad) && ValidacionPiso(intpiso)){
 			Salon^ s = gcnew Salon();
-			s->nombre = nombre;
-			s->tipo_Aula = tipo_Salon;
-			s->tipo_Pizarra = tipo_pizarra;
-			s->estado = estado;
-			s->capacidad = intcapacidad;
-			s->piso = intpiso;
-			if (rbtnProyector->Checked) s->proyector = 'Y';
+			if (nombre != nullptr)
+				s->nombre = nombre;
+			if (tipo_Salon != nullptr)
+				s->tipo_Aula = tipo_Salon;
+			if (tipo_pizarra != nullptr)
+				s->tipo_Pizarra = tipo_pizarra;
+			if (estado != nullptr)
+				s->estado = estado;
+			if (intcapacidad != 0)
+				s->capacidad = intcapacidad;
+			if (intpiso != 0)
+				s->piso = intpiso;
+			if (cbProyector->Checked) s->proyector = 'Y';
 			else s->proyector = 'N';
-			if (rbtnWifi->Checked) s->wifi = 'Y';
+			if (cbWifi->Checked) s->wifi = 'Y';
 			else s->wifi = 'N';
 			SICOLManager::AddSalon(s);
 			MessageBox::Show("Salon Incluido Correctamente");
