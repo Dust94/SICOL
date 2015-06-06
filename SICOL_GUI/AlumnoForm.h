@@ -528,7 +528,7 @@ namespace SICOL_GUI {
 		}
 #pragma endregion
 	public: void RefreshDGVAlumnos(){
-				List<Alumno^>^ productList = SICOLManager::QueryAll();
+		List<Alumno^>^ productList = SICOLManager::QueryAllAlumnos();
 				//lstProducts->Items->Clear();
 				/*dgvAlumnos->Rows->Clear();
 				for (int i = 0; i < productList->Count; i++){

@@ -87,15 +87,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlumnoForm.cpp" />
+    <ClCompile Include="SalonForm.cpp" />
+    <ClCompile Include="SICOLForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlumnoForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="SalonForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="SICOLForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AlumnoForm.resx">
       <DependentUpon>AlumnoForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SICOLForm.resx">
+      <DependentUpon>SICOLForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
