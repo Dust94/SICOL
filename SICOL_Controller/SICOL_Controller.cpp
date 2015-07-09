@@ -21,9 +21,10 @@ void AlumnoDB::Add(Alumno ^ a){
 	SqlCommand^ comm = gcnew SqlCommand();
 	comm->Connection = conn;
 	comm->CommandText = "INSERT INTO STUDENT_2015_1 " +
-		"(dni, name, lastName, secondLastName, birthday, gender, telephoneNumber, address, admissionDate, schoolId, attorneyId) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8, @p9, @p10, @p11)";
+		"(dni, name, lastName, secondLastName, birthday, gender, telephoneNumber, address, admissionDate, schoolId, attorneyId)" +
+		" VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8, @p9, @p10, @p11)";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p2 = gcnew SqlParameter("@p2",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p3 = gcnew SqlParameter("@p3",
@@ -31,7 +32,7 @@ void AlumnoDB::Add(Alumno ^ a){
 	SqlParameter^ p4 = gcnew SqlParameter("@p4",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p5 = gcnew SqlParameter("@p5",
-		System::Data::SqlDbType::Date);
+		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p6 = gcnew SqlParameter("@p6",
 		System::Data::SqlDbType::Char);
 	SqlParameter^ p7 = gcnew SqlParameter("@p7",
@@ -86,10 +87,12 @@ void AlumnoDB::Update(Alumno^ a){
 	//Paso 2: Preparamos la sentencia
 	SqlCommand^ comm = gcnew SqlCommand();
 	comm->Connection = conn;
-	comm->CommandText = "INSERT INTO STUDENT_2015_1 " +
-		"(dni, name, lastName, secondLastName, birthday, gender, telephoneNumber, address, admissionDate, schoolId, attorneyId) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8, @p9, @p10, @p11)";
+	comm->CommandText = "UPDATE INTO STUDENT_2015_1 " +
+		"SET dni=@p1, name=@p2, lastName=@p3, secondLastName=@p4, birthday=@p5, gender=@p6, telephoneNumber=@p7, "+
+		"address=@p8, admissionDate=@p9, schoolId=@p10, attorneyId=@p11 " +
+		"WHERE id=@p12";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p2 = gcnew SqlParameter("@p2",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p3 = gcnew SqlParameter("@p3",
@@ -97,7 +100,7 @@ void AlumnoDB::Update(Alumno^ a){
 	SqlParameter^ p4 = gcnew SqlParameter("@p4",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p5 = gcnew SqlParameter("@p5",
-		System::Data::SqlDbType::Date);
+		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p6 = gcnew SqlParameter("@p6",
 		System::Data::SqlDbType::Char);
 	SqlParameter^ p7 = gcnew SqlParameter("@p7",
@@ -109,6 +112,8 @@ void AlumnoDB::Update(Alumno^ a){
 	SqlParameter^ p10 = gcnew SqlParameter("@p10",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p11 = gcnew SqlParameter("@p11",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p12 = gcnew SqlParameter("@p12",
 		System::Data::SqlDbType::Int);
 
 	//Le paso los valores del objeto Alumno a los parametros pi
@@ -123,6 +128,7 @@ void AlumnoDB::Update(Alumno^ a){
 	p9->Value = a->fechaIngreso;
 	p10->Value = a->codigo;
 	p11->Value = a->apoderado->id;
+	p12->Value = a->id;
 
 	//Paso los Valores a la Base de Datos
 	comm->Parameters->Add(p1);
@@ -136,6 +142,7 @@ void AlumnoDB::Update(Alumno^ a){
 	comm->Parameters->Add(p9);
 	comm->Parameters->Add(p10);
 	comm->Parameters->Add(p11);
+	comm->Parameters->Add(p12);
 
 	//Paso 3: Ejecución de la sentencia
 	comm->ExecuteNonQuery();
@@ -176,7 +183,7 @@ Alumno^ AlumnoDB::QueryByCodigo(int codigo){
 	SqlCommand^ comm = gcnew SqlCommand();
 	comm->Connection = conn;
 	comm->CommandText = "SELECT * FROM STUDENT_2015_1 " +
-		"WHERE id=@p1";
+		"WHERE schoolId=@p1";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::VarChar);
 	p1->Value = codigo;
@@ -200,15 +207,15 @@ Alumno^ AlumnoDB::QueryByCodigo(int codigo){
 		if (dr["birthday"] != System::DBNull::Value)
 			a->fechaNacimiento = safe_cast<String ^>(dr["birthday"]);
 		if (dr["gender"] != System::DBNull::Value)
-			a->sexo = safe_cast<String ^>(dr["gender"]);
+			a->sexo = Char::Parse(safe_cast<String ^>(dr["gender"]));
 		if (dr["telephoneNumber"] != System::DBNull::Value)
-			a->telefono = safe_cast<int>(dr["telephoneNumber"]);
+			a->telefono = safe_cast<String ^>(dr["telephoneNumber"]);
 		if (dr["address"] != System::DBNull::Value)
 			a->direccion = safe_cast<String ^>(dr["address"]);
 		if (dr["admissionDate"] != System::DBNull::Value)
 			a->fechaIngreso = safe_cast<String ^>(dr["admissionDate"]);
 		if (dr["schoolId"] != System::DBNull::Value)
-			a->codigo = safe_cast<int>(dr["schoolId"]);
+			a->codigo = safe_cast<String ^>(dr["schoolId"]);
 		if (dr["attorneyId"] != System::DBNull::Value)
 			a->apoderado->id = safe_cast<int>(dr["attorneyId"]);
 	}
@@ -228,7 +235,7 @@ Alumno^ AlumnoDB::QueryByDni(int dni){
 	SqlCommand^ comm = gcnew SqlCommand();
 	comm->Connection = conn;
 	comm->CommandText = "SELECT * FROM STUDENT_2015_1 " +
-		"WHERE id=@p1";
+		"WHERE dni=@p1";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::Char);
 	p1->Value = dni;
@@ -236,7 +243,6 @@ Alumno^ AlumnoDB::QueryByDni(int dni){
 
 	//Paso 3: Ejecución de la sentencia
 	SqlDataReader^ dr = comm->ExecuteReader();
-
 	//Paso 3.1: Procesamos los resultados	
 	Alumno ^a = nullptr;
 	if (dr->Read()){
@@ -252,15 +258,15 @@ Alumno^ AlumnoDB::QueryByDni(int dni){
 		if (dr["birthday"] != System::DBNull::Value)
 			a->fechaNacimiento = safe_cast<String ^>(dr["birthday"]);
 		if (dr["gender"] != System::DBNull::Value)
-			a->sexo = safe_cast<String ^>(dr["gender"]);
+			a->sexo = Char::Parse(safe_cast<String ^>(dr["gender"]));
 		if (dr["telephoneNumber"] != System::DBNull::Value)
-			a->telefono = safe_cast<int>(dr["telephoneNumber"]);
+			a->telefono = safe_cast<String ^>(dr["telephoneNumber"]);
 		if (dr["address"] != System::DBNull::Value)
 			a->direccion = safe_cast<String ^>(dr["address"]);
 		if (dr["admissionDate"] != System::DBNull::Value)
 			a->fechaIngreso = safe_cast<String ^>(dr["admissionDate"]);
 		if (dr["schoolId"] != System::DBNull::Value)
-			a->codigo = safe_cast<int>(dr["schoolId"]);
+			a->codigo = safe_cast<String ^>(dr["schoolId"]);
 		if (dr["attorneyId"] != System::DBNull::Value)
 			a->apoderado->id = safe_cast<int>(dr["attorneyId"]);
 	}
@@ -283,7 +289,6 @@ List<Alumno^>^ AlumnoDB::QueryAllAlumnos(){
 
 	//Paso 3: Ejecución de la sentencia
 	SqlDataReader^ dr = comm->ExecuteReader();
-
 	//Paso 3.1: Procesamos los resultados
 	List<Alumno^> ^listAlumnos = gcnew List<Alumno^>();
 	while (dr->Read()){
@@ -299,15 +304,15 @@ List<Alumno^>^ AlumnoDB::QueryAllAlumnos(){
 		if (dr["birthday"] != System::DBNull::Value)
 			a->fechaNacimiento = safe_cast<String ^>(dr["birthday"]);
 		if (dr["gender"] != System::DBNull::Value)
-			a->sexo = safe_cast<String ^>(dr["gender"]);
+			a->sexo = Char::Parse(safe_cast<String ^>(dr["gender"]));
 		if (dr["telephoneNumber"] != System::DBNull::Value)
-			a->telefono = safe_cast<int>(dr["telephoneNumber"]);
+			a->telefono = safe_cast<String ^>(dr["telephoneNumber"]);
 		if (dr["address"] != System::DBNull::Value)
 			a->direccion = safe_cast<String ^>(dr["address"]);
 		if (dr["admissionDate"] != System::DBNull::Value)
 			a->fechaIngreso = safe_cast<String ^>(dr["admissionDate"]);
 		if (dr["schoolId"] != System::DBNull::Value)
-			a->codigo = safe_cast<int>(dr["schoolId"]);
+			a->codigo = safe_cast<String ^>(dr["schoolId"]);
 		if (dr["attorneyId"] != System::DBNull::Value)
 			a->apoderado->id = safe_cast<int>(dr["attorneyId"]);
 		listAlumnos->Add(a);

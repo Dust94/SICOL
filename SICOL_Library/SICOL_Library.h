@@ -8,23 +8,32 @@ namespace SICOL_Library {
 	public ref class Persona
 	{
 	public:
+		int id;
 		String^ dni;
 		String^ nombre;
 		String^ apellido_Pa;
 		String^ apellido_Ma;
 		String^ fechaNacimiento; //DateTime^ nacimiento;
-		String^ sexo; // Masculino o Femenino
-		int telefono;
+		char sexo; // (M) Masculino o (F)Femenino
+		String^ telefono; //Numero Telefonico
 		String^ direccion;
 	}; // Fin Clase Persona
 
 	public ref class Apoderado :Persona
 	{
-		public:
-			int id;
-			String^ email;
-			String^ parentesco; //Papá, Mamá o Tutor
+	public:
+		String^ email;
+		String^ parentesco; //Papá, Mamá o Tutor
 	}; // Fin Clase Apoderado
+
+	[Serializable]
+	public ref class Alumno :Persona
+	{
+	public:
+		String^ fechaIngreso;  //DateTime^ ingreso;
+		String^ codigo; //Codigo del Alumno  ejem:20111550
+		Apoderado^ apoderado;
+	}; // Fin Clase Alumno
 
 	public ref class Profesor :Persona
 	{
@@ -32,15 +41,6 @@ namespace SICOL_Library {
 			String^ especialidad; //Matematica, Comunicacion,etc
 			String^ UniversidadOrig;
 	}; // Fin Clase Profesor
-
-	[Serializable]
-	public ref class Alumno :Persona
-	{
-		public:
-			String^ fechaIngreso;  //DateTime^ ingreso;
-			int codigo; //Codigo del Alumno  ejem:20111550
-			Apoderado^ apoderado;
-	}; // Fin Clase Alumno
 
 	public ref class Seccion //A, B, C, D
 	{
