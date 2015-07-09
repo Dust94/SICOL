@@ -53,7 +53,7 @@ void AlumnoDB::Add(Alumno ^ a){
 	p3->Value = a->apellido_Pa;
 	p4->Value = a->apellido_Ma;
 	p5->Value = a->fechaNacimiento;
-	p6->Value = a->sexo;
+	p6->Value = gcnew String(a->sexo, 1); 
 	p7->Value = a->telefono;
 	p8->Value = a->direccion;
 	p9->Value = a->fechaIngreso;
@@ -123,7 +123,7 @@ void AlumnoDB::Update(Alumno^ a){
 	p3->Value = a->apellido_Pa;
 	p4->Value = a->apellido_Ma;
 	p5->Value = a->fechaNacimiento;
-	p6->Value = a->sexo;
+	p6->Value = gcnew String(a->sexo, 1);
 	p7->Value = a->telefono;
 	p8->Value = a->direccion;
 	p9->Value = a->fechaIngreso;
@@ -209,7 +209,7 @@ Alumno^ AlumnoDB::QueryById(int id){
 		if (dr["birthday"] != System::DBNull::Value)
 			a->fechaNacimiento = safe_cast<String ^>(dr["birthday"]);
 		if (dr["gender"] != System::DBNull::Value)
-			a->sexo = Char::Parse(safe_cast<String ^>(dr["gender"]));
+			a->sexo = safe_cast<String ^>(dr["gender"])[0];
 		if (dr["telephoneNumber"] != System::DBNull::Value)
 			a->telefono = safe_cast<String ^>(dr["telephoneNumber"]);
 		if (dr["address"] != System::DBNull::Value)
@@ -263,7 +263,7 @@ Alumno^ AlumnoDB::QueryByCodigo(String^ codigoAlumno){
 		if (dr["birthday"] != System::DBNull::Value)
 			a->fechaNacimiento = safe_cast<String ^>(dr["birthday"]);
 		if (dr["gender"] != System::DBNull::Value)
-			a->sexo = Char::Parse(safe_cast<String ^>(dr["gender"]));
+			a->sexo = safe_cast<String ^>(dr["gender"])[0];
 		if (dr["telephoneNumber"] != System::DBNull::Value)
 			a->telefono = safe_cast<String ^>(dr["telephoneNumber"]);
 		if (dr["address"] != System::DBNull::Value)
@@ -316,7 +316,7 @@ Alumno^ AlumnoDB::QueryByDni(String^ dni){
 		if (dr["birthday"] != System::DBNull::Value)
 			a->fechaNacimiento = safe_cast<String ^>(dr["birthday"]);
 		if (dr["gender"] != System::DBNull::Value)
-			a->sexo = Char::Parse(safe_cast<String ^>(dr["gender"]));
+			a->sexo = safe_cast<String ^>(dr["gender"])[0];
 		if (dr["telephoneNumber"] != System::DBNull::Value)
 			a->telefono = safe_cast<String ^>(dr["telephoneNumber"]);
 		if (dr["address"] != System::DBNull::Value)
@@ -364,7 +364,7 @@ List<Alumno^>^ AlumnoDB::QueryAllAlumnos(){
 		if (dr["birthday"] != System::DBNull::Value)
 			a->fechaNacimiento = safe_cast<String ^>(dr["birthday"]);
 		if (dr["gender"] != System::DBNull::Value)
-			a->sexo = Char::Parse(safe_cast<String ^>(dr["gender"]));
+			a->sexo = safe_cast<String ^>(dr["gender"])[0];
 		if (dr["telephoneNumber"] != System::DBNull::Value)
 			a->telefono = safe_cast<String ^>(dr["telephoneNumber"]);
 		if (dr["address"] != System::DBNull::Value)

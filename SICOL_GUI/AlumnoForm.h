@@ -634,7 +634,9 @@ namespace SICOL_GUI {
 	public: void RefreshDGVAlumnos(){
 		List<Alumno^>^ listAlumnos = SICOLManager::QueryAllAlumnos();
 		dgvAlumnos->Rows->Clear();
+		
 		for (int i = 0; i < listAlumnos->Count; i++){
+			String^ sexo_StringI = gcnew String(listAlumnos[i]->sexo, 1);
 			dgvAlumnos->Rows->Add(gcnew array<String^>{
 				"" + listAlumnos[i]->id,
 					listAlumnos[i]->dni,
@@ -642,14 +644,14 @@ namespace SICOL_GUI {
 					listAlumnos[i]->apellido_Pa,
 					listAlumnos[i]->apellido_Ma,
 					listAlumnos[i]->fechaNacimiento,
-					Convert::ToString(listAlumnos[i]->sexo),
+					sexo_StringI,
 					listAlumnos[i]->telefono,
 					listAlumnos[i]->direccion,
 					listAlumnos[i]->fechaIngreso,
 					listAlumnos[i]->codigo,
 				""+	listAlumnos[i]->apoderado->id});
 		}//Fin del For
-	}//Fin del Metodo RefreshDGVStaff
+	}//Fin del Metodo RefreshDGVAlumnos
 	public:	int idAlumno;
 	private: System::Void btnAddAlumno_Click(System::Object^  sender, System::EventArgs^  e) { //Add
 		String^ dni = txtDni->Text;
@@ -657,14 +659,14 @@ namespace SICOL_GUI {
 		String^ ApPaterno = txtApPaterno->Text;
 		String^ ApMaterno = txtApMaterno->Text;
 		DateTime^ fechaNacimiento_Date = dtpNacimiento->Value;
-		String^ fechaNacimiento_String = fechaNacimiento_Date->ToString("dd/MM/yy");
+		String^ fechaNacimiento_String = fechaNacimiento_Date->ToString("dd-MM-yyyy");
 		char sexo;
 		if (rbtnMasculino->Checked) sexo = 'M';
 		if (rbtnFemenino->Checked) sexo = 'F';
 		String^ telefono = txtTelefono->Text;
 		String^ direccion = txtDireccion->Text;
 		DateTime^ fechaIngreso_Date = dtpIngreso->Value;
-		String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd/MM/yy");
+		String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd-MM-yyyy");
 		String^ CodigoAlumno = txtCodigoAlumno->Text;
 		String^ IdApoderado = txtIdApoderado->Text;
 
@@ -696,14 +698,14 @@ private: System::Void btnUpdateAlumno_Click(System::Object^  sender, System::Eve
 	String^ ApPaterno = txtApPaterno->Text;
 	String^ ApMaterno = txtApMaterno->Text;
 	DateTime^ fechaNacimiento_Date = dtpNacimiento->Value;
-	String^ fechaNacimiento_String = fechaNacimiento_Date->ToString("dd/mm/yy");
+	String^ fechaNacimiento_String = fechaNacimiento_Date->ToString("dd-MM-yyyy");
 	char sexo;
 	if (rbtnMasculino->Checked) sexo = 'M';
 	if (rbtnFemenino->Checked) sexo = 'F';
 	String^ telefono = txtTelefono->Text;
 	String^ direccion = txtDireccion->Text;
 	DateTime^ fechaIngreso_Date = dtpIngreso->Value;
-	String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd/mm/yy");
+	String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd-MM-yyyy");
 	String^ CodigoAlumno = txtCodigoAlumno->Text;
 	String^ IdApoderado = txtIdApoderado->Text;
 
