@@ -413,7 +413,7 @@ namespace SICOL_GUI {
 			// 
 			// btnQuerySalonByName
 			// 
-			this->btnQuerySalonByName->Location = System::Drawing::Point(649, 224);
+			this->btnQuerySalonByName->Location = System::Drawing::Point(654, 225);
 			this->btnQuerySalonByName->Name = L"btnQuerySalonByName";
 			this->btnQuerySalonByName->Size = System::Drawing::Size(87, 23);
 			this->btnQuerySalonByName->TabIndex = 25;
