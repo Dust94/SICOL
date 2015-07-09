@@ -1,7 +1,7 @@
 
 #pragma once
 using namespace System;
-//using namespace System::Runtime::Serialization;
+using namespace System::Runtime::Serialization;
 using namespace System::Collections::Generic;
 
 namespace SICOL_Library {
@@ -38,7 +38,7 @@ namespace SICOL_Library {
 	{
 		public:
 			String^ fechaIngreso;  //DateTime^ ingreso;
-			int codigo;
+			int codigo; //Codigo del Alumno  ejem:20111550
 			Apoderado^ apoderado;
 	}; // Fin Clase Alumno
 
@@ -47,18 +47,18 @@ namespace SICOL_Library {
 		public:
 			int id;
 			String^ nombre; //A, B, C, D
-			String^ salon;
+			String^ salon; //Nombre del Salon 1 a 1
 			List<Alumno^>^ Alumnos; //Alumnos que estudiaran en una Seccion
 	}; // Fin Clase Seccion
 
 	public ref class Grado // 1°, 2°, etc
 	{
 		public:
-			int id;
+			int id;	//identificador de Grado
 			int numero; //número de grado 1°, 2°, etc
 			String^ nivel; //Primaria o Secundaria  "level" en el DB
 			int año_academico; //Solo me interesan numeros enteros(años)
-			List<Seccion^>^ Secciones;
+			List<Seccion^>^ Secciones; //Todas las secciones de un Grado. Ejem: 1A, 1B, 1C, 1D
 	}; // Fin Clase Grado
 
 	public ref class Salon // A106, A108, etc Para el Curso es igual a la Seccion.
@@ -66,12 +66,12 @@ namespace SICOL_Library {
 	public:
 		int id;
 		String^ nombre; // A106, A108, etc 
-		int capacidad;
-		String^ tipo_Aula;
-		String^ tipo_Pizarra;
+		int capacidad; //Cuantas alumnos caben en un salon
+		String^ tipo_Aula; //Aula o Laboratorio
+		String^ tipo_Pizarra; //Acrilica o Para Tiza
 		int piso; //1 piso , 2 piso	
 		String^ estado; //activo o inactivo
 		char proyector; //Y,N
-		char wifi;
+		char wifi; //Y,N
 	}; // Fin Clase Salon
 }
