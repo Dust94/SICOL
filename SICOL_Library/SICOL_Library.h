@@ -63,15 +63,15 @@ namespace SICOL_Library {
 
 	public ref class Salon // A106, A108, etc Para el Curso es igual a la Seccion.
 	{
-	public:
-		int id;
-		String^ nombre; // A106, A108, etc 
-		int capacidad; //Cuantas alumnos caben en un salon
-		String^ tipo_Aula; //Aula o Laboratorio
-		String^ tipo_Pizarra; //Acrilica o Para Tiza
-		int piso; //1 piso , 2 piso	
-		String^ estado; //activo o inactivo
-		char proyector; //Y,N
-		char wifi; //Y,N
+		public:
+			int id;
+			String^ nombre; // A106, A108, etc 
+			int capacidad; //Cuantas alumnos caben en un salon
+			String^ tipo_Aula; //Aula o Laboratorio
+			String^ tipo_Pizarra; //Acrilica o Para Tiza
+			int piso; //1 piso , 2 piso	
+			String^ estado; //activo o inactivo
+			char proyector; //Y,N
+			char wifi; //Y,N
 	}; // Fin Clase Salon
 }

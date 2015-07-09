@@ -565,7 +565,7 @@ private: System::Void btnDelete_Click(System::Object^  sender, System::EventArgs
 		String^ NombreSalon = dgvSalon->SelectedRows[0]->
 			Cells[1]->Value->ToString();
 
-		SICOLManager::DeleteSalon(NombreSalon);
+		//SICOLManager::DeleteSalon(NombreSalon);
 		RefreshDGVPSalones();
 	}
 }

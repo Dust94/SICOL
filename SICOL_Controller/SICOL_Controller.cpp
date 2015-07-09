@@ -149,7 +149,7 @@ void AlumnoDB::Update(Alumno^ a){
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
 }//Fin Metodo Update() de AlumnoDB
-void AlumnoDB::Delete(String^ name){
+void AlumnoDB::Delete(int id){
 	SqlConnection^ conn;
 	conn = gcnew SqlConnection();
 	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
@@ -164,7 +164,7 @@ void AlumnoDB::Delete(String^ name){
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::VarChar);
 	//Le paso el parametro nombre de mi funcion al parametro p1 = nombre de la base de datos
-	p1->Value = name;
+	p1->Value = id;
 	//Añado el parametro
 	comm->Parameters->Add(p1);
 	//Paso 3: Ejecución de la sentencia
@@ -442,7 +442,7 @@ void SalonDB::Update(Salon^ s){
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
 }
-void SalonDB::Delete(String^ name){
+void SalonDB::Delete(int id){
 	SqlConnection^ conn;
 	conn = gcnew SqlConnection();
 	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
@@ -456,7 +456,7 @@ void SalonDB::Delete(String^ name){
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::VarChar);
 
-	p1->Value = name;
+	p1->Value = id;
 	comm->Parameters->Add(p1);
 
 	//Paso 3: Ejecución de la sentencia
@@ -703,8 +703,8 @@ void SICOLManager::UpdateAlumno(Alumno^ a){
 	Alumnos->Update(a);
 	PersistToXMLFileAlumnoDB();
 }
-void SICOLManager::DeleteAlumno(String^ name){
-	Alumnos->Delete(name);
+void SICOLManager::DeleteAlumno(int id){
+	Alumnos->Delete(id);
 }
 Alumno^ SICOLManager::QueryAlumnoByCodigo(int codigo){
 	LoadFromXMLFileAlumnoDB();
@@ -728,8 +728,8 @@ void SICOLManager::AddSalon(Salon^ s){
 void SICOLManager::UpdateSalon(Salon^ s){
 	salones->Update(s);
 }
-void SICOLManager::DeleteSalon(String^ name){
-	salones->Delete(name);
+void SICOLManager::DeleteSalon(int id){
+	salones->Delete(id);
 }
 Salon^ SICOLManager::QuerySalonByCodigo(int codigo){ 
 	return salones->QueryByCodigo(codigo);

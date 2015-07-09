@@ -13,7 +13,7 @@ namespace SICOL_Controller {
 		public:
 			void Add(Alumno ^ a);
 			void Update(Alumno^ a);
-			void Delete(String^ name);
+			void Delete(int id); //Delete by identificador "id" del Alumno
 			Alumno^ QueryByCodigo(int codigo);
 			Alumno^ QueryByDni(int dni);
 			List<Alumno^>^ QueryAllAlumnos();
@@ -25,7 +25,7 @@ namespace SICOL_Controller {
 		public:
 			void Add(Salon^ s);
 			void Update(Salon^ s);
-			void Delete(String^ name); // name =nombre salon
+			void Delete(int id); // /Delete by identificador "id" del Salon
 			Salon^ QueryByCodigo(int codigo);
 			Salon^ QueryByNombre(String^ name);
 			List<Salon^>^ QueryAll();
@@ -42,7 +42,7 @@ namespace SICOL_Controller {
 			//Metodos Estaticos de para AlumnoDB 
 			void static AddAlumno(Alumno^ a);
 			void static UpdateAlumno(Alumno^ a);
-			void static DeleteAlumno(String^ name);
+			void static DeleteAlumno(int id);
 			static Alumno^ QueryAlumnoByCodigo(int codigo);
 			static Alumno^ QueryAlumnoByDni(int dni);
 			static List<Alumno^>^ QueryAllAlumnos();
@@ -52,7 +52,7 @@ namespace SICOL_Controller {
 			//Metodos Estaticos de para SalonDB 
 			static void AddSalon(Salon^ s);
 			static void UpdateSalon(Salon^ s);
-			static void DeleteSalon(String^ name); // name =nombre salon
+			static void DeleteSalon(int id); 
 			static Salon^ QuerySalonByCodigo(int codigo);
 			static Salon^ QuerySalonByNombre(String^ name);
 			static List<Salon^>^ QueryAllSalones();
