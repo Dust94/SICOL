@@ -34,7 +34,7 @@ void AlumnoDB::Add(Alumno ^ a){
 	SqlParameter^ p5 = gcnew SqlParameter("@p5",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p6 = gcnew SqlParameter("@p6",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Char, 1);
 	SqlParameter^ p7 = gcnew SqlParameter("@p7",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p8 = gcnew SqlParameter("@p8",
@@ -87,7 +87,7 @@ void AlumnoDB::Update(Alumno^ a){
 	//Paso 2: Preparamos la sentencia
 	SqlCommand^ comm = gcnew SqlCommand();
 	comm->Connection = conn;
-	comm->CommandText = "UPDATE INTO STUDENT_2015_1 " +
+	comm->CommandText = "UPDATE STUDENT_2015_1 " +
 		"SET dni=@p1, name=@p2, lastName=@p3, secondLastName=@p4, birthday=@p5, gender=@p6, telephoneNumber=@p7, "+
 		"address=@p8, admissionDate=@p9, schoolId=@p10, attorneyId=@p11 " +
 		"WHERE id=@p12";
@@ -102,7 +102,7 @@ void AlumnoDB::Update(Alumno^ a){
 	SqlParameter^ p5 = gcnew SqlParameter("@p5",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p6 = gcnew SqlParameter("@p6",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Char, 1);
 	SqlParameter^ p7 = gcnew SqlParameter("@p7",
 		System::Data::SqlDbType::VarChar);
 	SqlParameter^ p8 = gcnew SqlParameter("@p8",

@@ -109,6 +109,7 @@ namespace SICOL_GUI {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  codigo;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  apoderado;
 	private: System::Windows::Forms::Button^  btnUpdateAlumno;
+	private: System::Windows::Forms::Label^  lblprueba;
 
 
 
@@ -206,6 +207,7 @@ namespace SICOL_GUI {
 			this->btnDelete = (gcnew System::Windows::Forms::Button());
 			this->dtpIngreso = (gcnew System::Windows::Forms::DateTimePicker());
 			this->btnUpdateAlumno = (gcnew System::Windows::Forms::Button());
+			this->lblprueba = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvAlumnos))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -571,11 +573,21 @@ namespace SICOL_GUI {
 			this->btnUpdateAlumno->UseVisualStyleBackColor = true;
 			this->btnUpdateAlumno->Click += gcnew System::EventHandler(this, &AlumnoForm::btnUpdateAlumno_Click);
 			// 
+			// lblprueba
+			// 
+			this->lblprueba->AutoSize = true;
+			this->lblprueba->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->lblprueba->Location = System::Drawing::Point(416, 169);
+			this->lblprueba->Name = L"lblprueba";
+			this->lblprueba->Size = System::Drawing::Size(2, 15);
+			this->lblprueba->TabIndex = 53;
+			// 
 			// AlumnoForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(827, 596);
+			this->Controls->Add(this->lblprueba);
 			this->Controls->Add(this->btnUpdateAlumno);
 			this->Controls->Add(this->dtpIngreso);
 			this->Controls->Add(this->btnDelete);
@@ -645,18 +657,20 @@ namespace SICOL_GUI {
 		String^ ApPaterno = txtApPaterno->Text;
 		String^ ApMaterno = txtApMaterno->Text;
 		DateTime^ fechaNacimiento_Date = dtpNacimiento->Value;
-		String^ fechaNacimiento_String = fechaNacimiento_Date->ToString("dd/mm/yy");
+		String^ fechaNacimiento_String = fechaNacimiento_Date->ToString("dd/MM/yy");
 		char sexo;
 		if (rbtnMasculino->Checked) sexo = 'M';
 		if (rbtnFemenino->Checked) sexo = 'F';
 		String^ telefono = txtTelefono->Text;
 		String^ direccion = txtDireccion->Text;
 		DateTime^ fechaIngreso_Date = dtpIngreso->Value;
-		String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd/mm/yy");
+		String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd/MM/yy");
 		String^ CodigoAlumno = txtCodigoAlumno->Text;
 		String^ IdApoderado = txtIdApoderado->Text;
 
+		lblprueba->Text = fechaIngreso_String;
 		Alumno^ a = gcnew Alumno();
+		a->apoderado = gcnew Apoderado();
 		a->dni = dni;
 		a->nombre = nombre;
 		a->apellido_Pa = ApPaterno;
@@ -694,6 +708,7 @@ private: System::Void btnUpdateAlumno_Click(System::Object^  sender, System::Eve
 	String^ IdApoderado = txtIdApoderado->Text;
 
 	Alumno^ a = gcnew Alumno();
+	a->apoderado = gcnew Apoderado();
 	a = SICOLManager::QueryAlumnoById(idAlumno);
 	a->dni = dni;
 	a->nombre = nombre;
