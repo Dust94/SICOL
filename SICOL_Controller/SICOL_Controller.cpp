@@ -172,7 +172,58 @@ void AlumnoDB::Delete(int id){
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
 }//Fin Metodo Delete() de AlumnoDB
-Alumno^ AlumnoDB::QueryByCodigo(int codigo){
+Alumno^ AlumnoDB::QueryById(int id){
+	//Paso 1: Obtener la conexión
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "SELECT * FROM STUDENT_2015_1 " +
+		"WHERE id=@p1";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+	p1->Value = id;
+	comm->Parameters->Add(p1);
+
+	//Paso 3: Ejecución de la sentencia
+	SqlDataReader^ dr = comm->ExecuteReader();
+	//Paso 3.1: Procesamos los resultados	
+	Alumno ^a = nullptr;
+	if (dr->Read()){
+		a = gcnew Alumno();
+		if (dr["dni"] != System::DBNull::Value)
+			a->dni = safe_cast<String ^>(dr["dni"]);
+		if (dr["name"] != System::DBNull::Value)
+			a->nombre = safe_cast<String ^>(dr["name"]);
+		if (dr["lastName"] != System::DBNull::Value)
+			a->apellido_Pa = safe_cast<String ^>(dr["lastName"]);
+		if (dr["secondLastName"] != System::DBNull::Value)
+			a->apellido_Ma = safe_cast<String ^>(dr["secondLastName"]);
+		if (dr["birthday"] != System::DBNull::Value)
+			a->fechaNacimiento = safe_cast<String ^>(dr["birthday"]);
+		if (dr["gender"] != System::DBNull::Value)
+			a->sexo = Char::Parse(safe_cast<String ^>(dr["gender"]));
+		if (dr["telephoneNumber"] != System::DBNull::Value)
+			a->telefono = safe_cast<String ^>(dr["telephoneNumber"]);
+		if (dr["address"] != System::DBNull::Value)
+			a->direccion = safe_cast<String ^>(dr["address"]);
+		if (dr["admissionDate"] != System::DBNull::Value)
+			a->fechaIngreso = safe_cast<String ^>(dr["admissionDate"]);
+		if (dr["schoolId"] != System::DBNull::Value)
+			a->codigo = safe_cast<String ^>(dr["schoolId"]);
+		if (dr["attorneyId"] != System::DBNull::Value)
+			a->apoderado->id = safe_cast<int>(dr["attorneyId"]);
+	}
+	//Paso 4: Cerramos el dataReader y la conexión con la BD
+	dr->Close();
+	conn->Close();
+	return a;
+}
+Alumno^ AlumnoDB::QueryByCodigo(String^ codigoAlumno){
 	//Paso 1: Obtener la conexión
 	SqlConnection^ conn;
 	conn = gcnew SqlConnection();
@@ -186,7 +237,7 @@ Alumno^ AlumnoDB::QueryByCodigo(int codigo){
 		"WHERE schoolId=@p1";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::VarChar);
-	p1->Value = codigo;
+	p1->Value = codigoAlumno;
 	comm->Parameters->Add(p1);
 
 	//Paso 3: Ejecución de la sentencia
@@ -224,7 +275,7 @@ Alumno^ AlumnoDB::QueryByCodigo(int codigo){
 	conn->Close();
 	return a;
 }//Fin Metodo QueryByCodigo() de AlumnoDB
-Alumno^ AlumnoDB::QueryByDni(int dni){
+Alumno^ AlumnoDB::QueryByDni(String^ dni){
 	//Paso 1: Obtener la conexión
 	SqlConnection^ conn;
 	conn = gcnew SqlConnection();
@@ -237,7 +288,7 @@ Alumno^ AlumnoDB::QueryByDni(int dni){
 	comm->CommandText = "SELECT * FROM STUDENT_2015_1 " +
 		"WHERE dni=@p1";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::VarChar);
 	p1->Value = dni;
 	comm->Parameters->Add(p1);
 
@@ -706,12 +757,13 @@ void SICOLManager::UpdateAlumno(Alumno^ a){
 void SICOLManager::DeleteAlumno(int id){
 	Alumnos->Delete(id);
 }
-Alumno^ SICOLManager::QueryAlumnoByCodigo(int codigo){
-	LoadFromXMLFileAlumnoDB();
-	return Alumnos->QueryByCodigo(codigo);
+Alumno^ SICOLManager::QueryAlumnoById(int id){
+	return Alumnos->QueryById(id);
 }
-Alumno^ SICOLManager::QueryAlumnoByDni(int dni){
-	LoadFromXMLFileAlumnoDB();
+Alumno^ SICOLManager::QueryAlumnoByCodigo(String^ codigoAlumno){
+	return Alumnos->QueryByCodigo(codigoAlumno);
+}
+Alumno^ SICOLManager::QueryAlumnoByDni(String^ dni){
 	return Alumnos->QueryByDni(dni);
 }
 List<Alumno^>^ SICOLManager::QueryAllAlumnos(){

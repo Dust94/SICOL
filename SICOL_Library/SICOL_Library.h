@@ -56,8 +56,8 @@ namespace SICOL_Library {
 		public:
 			int id;	//identificador de Grado
 			int numero; //número de grado 1°, 2°, etc
-			String^ nivel; //Primaria o Secundaria  "level" en el DB
-			int año_academico; //Solo me interesan numeros enteros(años)
+			int año_academico; //Year DB. 1 .Solo me interesan numeros enteros(años).
+			String^ nivel; //level DB. Primaria o Secundaria  "level" en el DB				
 			List<Seccion^>^ Secciones; //Todas las secciones de un Grado. Ejem: 1A, 1B, 1C, 1D
 	}; // Fin Clase Grado
 

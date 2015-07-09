@@ -1,5 +1,4 @@
 // SICOL_Controller.h
-
 #pragma once
 using namespace System;
 using namespace SICOL_Library;
@@ -14,8 +13,9 @@ namespace SICOL_Controller {
 			void Add(Alumno ^ a);
 			void Update(Alumno^ a);
 			void Delete(int id); //Delete by identificador "id" del Alumno
-			Alumno^ QueryByCodigo(int codigo);
-			Alumno^ QueryByDni(int dni);
+			Alumno^ QueryById(int id); // Identificador "id" del Alumno
+			Alumno^ QueryByCodigo(String^ codigoAlumno); // codigo del Alumno
+			Alumno^ QueryByDni(String^ dni);
 			List<Alumno^>^ QueryAllAlumnos();
 	};
 
@@ -43,8 +43,9 @@ namespace SICOL_Controller {
 			void static AddAlumno(Alumno^ a);
 			void static UpdateAlumno(Alumno^ a);
 			void static DeleteAlumno(int id);
-			static Alumno^ QueryAlumnoByCodigo(int codigo);
-			static Alumno^ QueryAlumnoByDni(int dni);
+			static Alumno^ QueryAlumnoById(int id); // Identificador "id" del Alumno
+			static Alumno^ QueryAlumnoByCodigo(String^ codigoAlumno); // codigo del Alumno
+			static Alumno^ QueryAlumnoByDni(String^ dni);
 			static List<Alumno^>^ QueryAllAlumnos();
 			static void PersistToXMLFileAlumnoDB();
 			static void LoadFromXMLFileAlumnoDB();
