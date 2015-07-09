@@ -2,7 +2,6 @@
 #include "SalonForm.h"
 #include "AlumnoForm.h"
 #include "MatriculaForm.h"
-#include "BuscarAlumnoForm.h"
 
 namespace SICOL_GUI {
 
@@ -166,9 +165,9 @@ private: System::Void matriculaToolStripMenuItem_Click(System::Object^  sender, 
 		 sForm->Show();
 }
 private: System::Void buscarAlumnoToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-		 BuscarAlumnoForm^ sForm = gcnew BuscarAlumnoForm();
-		 sForm->MdiParent = this;
-		 sForm->Show();
+		 //BuscarAlumnoForm^ sForm = gcnew BuscarAlumnoForm();
+		 //sForm->MdiParent = this;
+		 //sForm->Show();
 }
 };
 }

@@ -195,6 +195,8 @@ Alumno^ AlumnoDB::QueryById(int id){
 	Alumno ^a = nullptr;
 	if (dr->Read()){
 		a = gcnew Alumno();
+		a->apoderado = gcnew Apoderado();
+		a->id = (int)dr["id"];
 		if (dr["dni"] != System::DBNull::Value)
 			a->dni = safe_cast<String ^>(dr["dni"]);
 		if (dr["name"] != System::DBNull::Value)
@@ -216,7 +218,7 @@ Alumno^ AlumnoDB::QueryById(int id){
 		if (dr["schoolId"] != System::DBNull::Value)
 			a->codigo = safe_cast<String ^>(dr["schoolId"]);
 		if (dr["attorneyId"] != System::DBNull::Value)
-			a->apoderado->id = safe_cast<int>(dr["attorneyId"]);
+			a->apoderado->id = (int)dr["attorneyId"];
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
 	dr->Close();
@@ -247,6 +249,8 @@ Alumno^ AlumnoDB::QueryByCodigo(String^ codigoAlumno){
 	Alumno ^a = nullptr;
 	if (dr->Read()){
 		a = gcnew Alumno();
+		a->apoderado = gcnew Apoderado();
+		a->id = (int)dr["id"];
 		if (dr["dni"] != System::DBNull::Value)
 			a->dni = safe_cast<String ^>(dr["dni"]);
 		if (dr["name"] != System::DBNull::Value)
@@ -268,7 +272,7 @@ Alumno^ AlumnoDB::QueryByCodigo(String^ codigoAlumno){
 		if (dr["schoolId"] != System::DBNull::Value)
 			a->codigo = safe_cast<String ^>(dr["schoolId"]);
 		if (dr["attorneyId"] != System::DBNull::Value)
-			a->apoderado->id = safe_cast<int>(dr["attorneyId"]);
+			a->apoderado->id = (int)dr["attorneyId"];
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
 	dr->Close();
@@ -298,6 +302,8 @@ Alumno^ AlumnoDB::QueryByDni(String^ dni){
 	Alumno ^a = nullptr;
 	if (dr->Read()){
 		a = gcnew Alumno();
+		a->apoderado = gcnew Apoderado();
+		a->id = (int)dr["id"];
 		if (dr["dni"] != System::DBNull::Value)
 			a->dni = safe_cast<String ^>(dr["dni"]);
 		if (dr["name"] != System::DBNull::Value)
@@ -319,7 +325,7 @@ Alumno^ AlumnoDB::QueryByDni(String^ dni){
 		if (dr["schoolId"] != System::DBNull::Value)
 			a->codigo = safe_cast<String ^>(dr["schoolId"]);
 		if (dr["attorneyId"] != System::DBNull::Value)
-			a->apoderado->id = safe_cast<int>(dr["attorneyId"]);
+			a->apoderado->id = (int)dr["attorneyId"];
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
 	dr->Close();
@@ -344,6 +350,8 @@ List<Alumno^>^ AlumnoDB::QueryAllAlumnos(){
 	List<Alumno^> ^listAlumnos = gcnew List<Alumno^>();
 	while (dr->Read()){
 		Alumno ^a = gcnew Alumno();
+		a->apoderado = gcnew Apoderado();
+		a->id = (int)dr["id"];
 		if (dr["dni"] != System::DBNull::Value)
 			a->dni = safe_cast<String ^>(dr["dni"]);
 		if (dr["name"] != System::DBNull::Value)
@@ -365,7 +373,7 @@ List<Alumno^>^ AlumnoDB::QueryAllAlumnos(){
 		if (dr["schoolId"] != System::DBNull::Value)
 			a->codigo = safe_cast<String ^>(dr["schoolId"]);
 		if (dr["attorneyId"] != System::DBNull::Value)
-			a->apoderado->id = safe_cast<int>(dr["attorneyId"]);
+			a->apoderado->id = (int)dr["attorneyId"];
 		listAlumnos->Add(a);
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD

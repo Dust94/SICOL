@@ -87,16 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlumnoForm.cpp" />
-    <ClCompile Include="BuscarAlumnoForm.cpp" />
     <ClCompile Include="MatriculaForm.cpp" />
     <ClCompile Include="SalonForm.cpp" />
     <ClCompile Include="SICOLForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlumnoForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="BuscarAlumnoForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MatriculaForm.h">
@@ -112,9 +108,6 @@
   <ItemGroup>
     <EmbeddedResource Include="AlumnoForm.resx">
       <DependentUpon>AlumnoForm.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BuscarAlumnoForm.resx">
-      <DependentUpon>BuscarAlumnoForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MatriculaForm.resx">
       <DependentUpon>MatriculaForm.h</DependentUpon>

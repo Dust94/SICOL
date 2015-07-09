@@ -45,6 +45,58 @@ namespace SICOL_GUI {
 	private: System::Windows::Forms::Button^  btnQueryAlumnos;
 	private: System::Windows::Forms::Button^  btnAddAlumno;
 	private: System::Windows::Forms::DataGridView^  dgvAlumnos;
+
+
+
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::TextBox^  txtNombre;
+	private: System::Windows::Forms::TextBox^  txtDni;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  lbldni;
+
+	private: System::Windows::Forms::Label^  label5;
+
+	private: System::Windows::Forms::TextBox^  txtApMaterno;
+	private: System::Windows::Forms::Label^  label6;
+	private: System::Windows::Forms::Label^  label7;
+	private: System::Windows::Forms::TextBox^  txtIdApoderado;
+	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::TextBox^  txtCodigoAlumno;
+
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::Label^  label10;
+	private: System::Windows::Forms::TextBox^  txtDireccion;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::TextBox^  txtTelefono;
+	private: System::Windows::Forms::Label^  label11;
+	private: System::Windows::Forms::TextBox^  txtQueryDNI;
+	private: System::Windows::Forms::Label^  label12;
+	private: System::Windows::Forms::Button^  btnQueryCodigo;
+	private: System::Windows::Forms::Button^  btnQueryDNI;
+	private: System::Windows::Forms::DateTimePicker^  dtpNacimiento;
+	private: System::Windows::Forms::RadioButton^  rbtnFemenino;
+	private: System::Windows::Forms::RadioButton^  rbtnMasculino;
+
+
+
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::Button^  btnDelete;
+	private: System::Windows::Forms::DateTimePicker^  dtpIngreso;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  id;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  dni;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  nombre;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Apellido_Pa;
@@ -56,30 +108,19 @@ namespace SICOL_GUI {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  ingreso;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  codigo;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  apoderado;
-	private: System::Windows::Forms::TextBox^  txtNombre;
-	private: System::Windows::Forms::TextBox^  txtDni;
-	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::Label^  lbldni;
-	private: System::Windows::Forms::TextBox^  txtSexo;
-	private: System::Windows::Forms::Label^  label5;
-	private: System::Windows::Forms::TextBox^  txtFechaNacimiento;
-	private: System::Windows::Forms::TextBox^  txtApMaterno;
-	private: System::Windows::Forms::Label^  label6;
-	private: System::Windows::Forms::Label^  label7;
-	private: System::Windows::Forms::TextBox^  txtIdApoderado;
-	private: System::Windows::Forms::Label^  label8;
-	private: System::Windows::Forms::TextBox^  txtCodigoAlumno;
-	private: System::Windows::Forms::TextBox^  txtFechaIngreso;
-	private: System::Windows::Forms::Label^  label9;
-	private: System::Windows::Forms::Label^  label10;
-	private: System::Windows::Forms::TextBox^  txtDireccion;
-	private: System::Windows::Forms::Label^  label1;
-	private: System::Windows::Forms::TextBox^  txtTelefono;
-	private: System::Windows::Forms::Label^  label11;
-	private: System::Windows::Forms::TextBox^  txtQueryDNI;
-	private: System::Windows::Forms::Label^  label12;
-	private: System::Windows::Forms::Button^  btnQueryCodigo;
-	private: System::Windows::Forms::Button^  btnQueryDNI;
+	private: System::Windows::Forms::Button^  btnUpdateAlumno;
+
+
+
+
+
+
+
+
+
+
+
+
 
 	protected:
 
@@ -126,6 +167,7 @@ namespace SICOL_GUI {
 			this->btnQueryAlumnos = (gcnew System::Windows::Forms::Button());
 			this->btnAddAlumno = (gcnew System::Windows::Forms::Button());
 			this->dgvAlumnos = (gcnew System::Windows::Forms::DataGridView());
+			this->id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->dni = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->nombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Apellido_Pa = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -141,16 +183,13 @@ namespace SICOL_GUI {
 			this->txtDni = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->lbldni = (gcnew System::Windows::Forms::Label());
-			this->txtSexo = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->txtFechaNacimiento = (gcnew System::Windows::Forms::TextBox());
 			this->txtApMaterno = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->txtIdApoderado = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->txtCodigoAlumno = (gcnew System::Windows::Forms::TextBox());
-			this->txtFechaIngreso = (gcnew System::Windows::Forms::TextBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->txtDireccion = (gcnew System::Windows::Forms::TextBox());
@@ -161,12 +200,18 @@ namespace SICOL_GUI {
 			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->btnQueryCodigo = (gcnew System::Windows::Forms::Button());
 			this->btnQueryDNI = (gcnew System::Windows::Forms::Button());
+			this->dtpNacimiento = (gcnew System::Windows::Forms::DateTimePicker());
+			this->rbtnFemenino = (gcnew System::Windows::Forms::RadioButton());
+			this->rbtnMasculino = (gcnew System::Windows::Forms::RadioButton());
+			this->btnDelete = (gcnew System::Windows::Forms::Button());
+			this->dtpIngreso = (gcnew System::Windows::Forms::DateTimePicker());
+			this->btnUpdateAlumno = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvAlumnos))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// txtApPaterno
 			// 
-			this->txtApPaterno->Location = System::Drawing::Point(220, 76);
+			this->txtApPaterno->Location = System::Drawing::Point(177, 76);
 			this->txtApPaterno->Name = L"txtApPaterno";
 			this->txtApPaterno->Size = System::Drawing::Size(100, 20);
 			this->txtApPaterno->TabIndex = 26;
@@ -182,7 +227,7 @@ namespace SICOL_GUI {
 			// 
 			// txtQueryCodigo
 			// 
-			this->txtQueryCodigo->Location = System::Drawing::Point(523, 176);
+			this->txtQueryCodigo->Location = System::Drawing::Point(577, 221);
 			this->txtQueryCodigo->Name = L"txtQueryCodigo";
 			this->txtQueryCodigo->Size = System::Drawing::Size(100, 20);
 			this->txtQueryCodigo->TabIndex = 24;
@@ -190,7 +235,7 @@ namespace SICOL_GUI {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(359, 176);
+			this->label3->Location = System::Drawing::Point(413, 221);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(158, 13);
 			this->label3->TabIndex = 23;
@@ -198,7 +243,7 @@ namespace SICOL_GUI {
 			// 
 			// btnQueryAlumnos
 			// 
-			this->btnQueryAlumnos->Location = System::Drawing::Point(416, 276);
+			this->btnQueryAlumnos->Location = System::Drawing::Point(48, 312);
 			this->btnQueryAlumnos->Name = L"btnQueryAlumnos";
 			this->btnQueryAlumnos->Size = System::Drawing::Size(113, 23);
 			this->btnQueryAlumnos->TabIndex = 21;
@@ -207,7 +252,7 @@ namespace SICOL_GUI {
 			// 
 			// btnAddAlumno
 			// 
-			this->btnAddAlumno->Location = System::Drawing::Point(443, 108);
+			this->btnAddAlumno->Location = System::Drawing::Point(416, 108);
 			this->btnAddAlumno->Name = L"btnAddAlumno";
 			this->btnAddAlumno->Size = System::Drawing::Size(100, 23);
 			this->btnAddAlumno->TabIndex = 20;
@@ -218,21 +263,28 @@ namespace SICOL_GUI {
 			// dgvAlumnos
 			// 
 			this->dgvAlumnos->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dgvAlumnos->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(11) {
-				this->dni, this->nombre,
-					this->Apellido_Pa, this->Apellido_Ma, this->nacimiento, this->sexo, this->telefono, this->direccion, this->ingreso, this->codigo,
-					this->apoderado
+			this->dgvAlumnos->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(12) {
+				this->id, this->dni,
+					this->nombre, this->Apellido_Pa, this->Apellido_Ma, this->nacimiento, this->sexo, this->telefono, this->direccion, this->ingreso,
+					this->codigo, this->apoderado
 			});
-			this->dgvAlumnos->Location = System::Drawing::Point(48, 316);
+			this->dgvAlumnos->Location = System::Drawing::Point(48, 341);
 			this->dgvAlumnos->Name = L"dgvAlumnos";
-			this->dgvAlumnos->Size = System::Drawing::Size(845, 228);
+			this->dgvAlumnos->Size = System::Drawing::Size(753, 228);
 			this->dgvAlumnos->TabIndex = 18;
+			this->dgvAlumnos->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &AlumnoForm::dgvAlumnos_CellContentClick);
+			// 
+			// id
+			// 
+			this->id->HeaderText = L"Id";
+			this->id->Name = L"id";
+			this->id->Width = 40;
 			// 
 			// dni
 			// 
 			this->dni->HeaderText = L"DNI";
 			this->dni->Name = L"dni";
-			this->dni->Width = 50;
+			this->dni->Width = 70;
 			// 
 			// nombre
 			// 
@@ -253,19 +305,19 @@ namespace SICOL_GUI {
 			// 
 			this->nacimiento->HeaderText = L"Fecha de Nacimiento";
 			this->nacimiento->Name = L"nacimiento";
-			this->nacimiento->Width = 50;
+			this->nacimiento->Width = 80;
 			// 
 			// sexo
 			// 
 			this->sexo->HeaderText = L"Sexo";
 			this->sexo->Name = L"sexo";
-			this->sexo->Width = 50;
+			this->sexo->Width = 40;
 			// 
 			// telefono
 			// 
 			this->telefono->HeaderText = L"Numero de Telefono";
 			this->telefono->Name = L"telefono";
-			this->telefono->Width = 50;
+			this->telefono->Width = 70;
 			// 
 			// direccion
 			// 
@@ -276,13 +328,13 @@ namespace SICOL_GUI {
 			// 
 			this->ingreso->HeaderText = L"Fecha de Ingreso";
 			this->ingreso->Name = L"ingreso";
-			this->ingreso->Width = 50;
+			this->ingreso->Width = 80;
 			// 
 			// codigo
 			// 
 			this->codigo->HeaderText = L"Codigo";
 			this->codigo->Name = L"codigo";
-			this->codigo->Width = 50;
+			this->codigo->Width = 70;
 			// 
 			// apoderado
 			// 
@@ -291,14 +343,14 @@ namespace SICOL_GUI {
 			// 
 			// txtNombre
 			// 
-			this->txtNombre->Location = System::Drawing::Point(220, 44);
+			this->txtNombre->Location = System::Drawing::Point(177, 44);
 			this->txtNombre->Name = L"txtNombre";
 			this->txtNombre->Size = System::Drawing::Size(100, 20);
 			this->txtNombre->TabIndex = 17;
 			// 
 			// txtDni
 			// 
-			this->txtDni->Location = System::Drawing::Point(220, 15);
+			this->txtDni->Location = System::Drawing::Point(177, 15);
 			this->txtDni->Name = L"txtDni";
 			this->txtDni->Size = System::Drawing::Size(100, 20);
 			this->txtDni->TabIndex = 16;
@@ -321,13 +373,6 @@ namespace SICOL_GUI {
 			this->lbldni->TabIndex = 14;
 			this->lbldni->Text = L"DNI";
 			// 
-			// txtSexo
-			// 
-			this->txtSexo->Location = System::Drawing::Point(220, 169);
-			this->txtSexo->Name = L"txtSexo";
-			this->txtSexo->Size = System::Drawing::Size(100, 20);
-			this->txtSexo->TabIndex = 32;
-			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
@@ -337,16 +382,9 @@ namespace SICOL_GUI {
 			this->label5->TabIndex = 31;
 			this->label5->Text = L"Sexo";
 			// 
-			// txtFechaNacimiento
-			// 
-			this->txtFechaNacimiento->Location = System::Drawing::Point(220, 137);
-			this->txtFechaNacimiento->Name = L"txtFechaNacimiento";
-			this->txtFechaNacimiento->Size = System::Drawing::Size(100, 20);
-			this->txtFechaNacimiento->TabIndex = 30;
-			// 
 			// txtApMaterno
 			// 
-			this->txtApMaterno->Location = System::Drawing::Point(220, 108);
+			this->txtApMaterno->Location = System::Drawing::Point(177, 108);
 			this->txtApMaterno->Name = L"txtApMaterno";
 			this->txtApMaterno->Size = System::Drawing::Size(100, 20);
 			this->txtApMaterno->TabIndex = 29;
@@ -371,7 +409,7 @@ namespace SICOL_GUI {
 			// 
 			// txtIdApoderado
 			// 
-			this->txtIdApoderado->Location = System::Drawing::Point(534, 72);
+			this->txtIdApoderado->Location = System::Drawing::Point(531, 69);
 			this->txtIdApoderado->Name = L"txtIdApoderado";
 			this->txtIdApoderado->Size = System::Drawing::Size(100, 20);
 			this->txtIdApoderado->TabIndex = 38;
@@ -379,7 +417,7 @@ namespace SICOL_GUI {
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(359, 72);
+			this->label8->Location = System::Drawing::Point(413, 69);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(59, 13);
 			this->label8->TabIndex = 37;
@@ -387,22 +425,15 @@ namespace SICOL_GUI {
 			// 
 			// txtCodigoAlumno
 			// 
-			this->txtCodigoAlumno->Location = System::Drawing::Point(534, 40);
+			this->txtCodigoAlumno->Location = System::Drawing::Point(531, 37);
 			this->txtCodigoAlumno->Name = L"txtCodigoAlumno";
 			this->txtCodigoAlumno->Size = System::Drawing::Size(100, 20);
 			this->txtCodigoAlumno->TabIndex = 36;
 			// 
-			// txtFechaIngreso
-			// 
-			this->txtFechaIngreso->Location = System::Drawing::Point(534, 11);
-			this->txtFechaIngreso->Name = L"txtFechaIngreso";
-			this->txtFechaIngreso->Size = System::Drawing::Size(100, 20);
-			this->txtFechaIngreso->TabIndex = 35;
-			// 
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(359, 43);
+			this->label9->Location = System::Drawing::Point(413, 40);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(40, 13);
 			this->label9->TabIndex = 34;
@@ -411,7 +442,7 @@ namespace SICOL_GUI {
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(359, 18);
+			this->label10->Location = System::Drawing::Point(413, 15);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(90, 13);
 			this->label10->TabIndex = 33;
@@ -419,7 +450,7 @@ namespace SICOL_GUI {
 			// 
 			// txtDireccion
 			// 
-			this->txtDireccion->Location = System::Drawing::Point(220, 236);
+			this->txtDireccion->Location = System::Drawing::Point(177, 236);
 			this->txtDireccion->Name = L"txtDireccion";
 			this->txtDireccion->Size = System::Drawing::Size(100, 20);
 			this->txtDireccion->TabIndex = 42;
@@ -435,7 +466,7 @@ namespace SICOL_GUI {
 			// 
 			// txtTelefono
 			// 
-			this->txtTelefono->Location = System::Drawing::Point(220, 204);
+			this->txtTelefono->Location = System::Drawing::Point(177, 204);
 			this->txtTelefono->Name = L"txtTelefono";
 			this->txtTelefono->Size = System::Drawing::Size(100, 20);
 			this->txtTelefono->TabIndex = 40;
@@ -451,7 +482,7 @@ namespace SICOL_GUI {
 			// 
 			// txtQueryDNI
 			// 
-			this->txtQueryDNI->Location = System::Drawing::Point(523, 222);
+			this->txtQueryDNI->Location = System::Drawing::Point(577, 256);
 			this->txtQueryDNI->Name = L"txtQueryDNI";
 			this->txtQueryDNI->Size = System::Drawing::Size(100, 20);
 			this->txtQueryDNI->TabIndex = 44;
@@ -459,7 +490,7 @@ namespace SICOL_GUI {
 			// label12
 			// 
 			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(359, 222);
+			this->label12->Location = System::Drawing::Point(413, 256);
 			this->label12->Name = L"label12";
 			this->label12->Size = System::Drawing::Size(144, 13);
 			this->label12->TabIndex = 43;
@@ -467,7 +498,7 @@ namespace SICOL_GUI {
 			// 
 			// btnQueryCodigo
 			// 
-			this->btnQueryCodigo->Location = System::Drawing::Point(642, 173);
+			this->btnQueryCodigo->Location = System::Drawing::Point(696, 218);
 			this->btnQueryCodigo->Name = L"btnQueryCodigo";
 			this->btnQueryCodigo->Size = System::Drawing::Size(100, 23);
 			this->btnQueryCodigo->TabIndex = 45;
@@ -477,18 +508,80 @@ namespace SICOL_GUI {
 			// 
 			// btnQueryDNI
 			// 
-			this->btnQueryDNI->Location = System::Drawing::Point(642, 222);
+			this->btnQueryDNI->Location = System::Drawing::Point(696, 256);
 			this->btnQueryDNI->Name = L"btnQueryDNI";
 			this->btnQueryDNI->Size = System::Drawing::Size(100, 23);
 			this->btnQueryDNI->TabIndex = 46;
 			this->btnQueryDNI->Text = L"Consultar";
 			this->btnQueryDNI->UseVisualStyleBackColor = true;
 			// 
+			// dtpNacimiento
+			// 
+			this->dtpNacimiento->Location = System::Drawing::Point(177, 137);
+			this->dtpNacimiento->Name = L"dtpNacimiento";
+			this->dtpNacimiento->Size = System::Drawing::Size(200, 20);
+			this->dtpNacimiento->TabIndex = 47;
+			// 
+			// rbtnFemenino
+			// 
+			this->rbtnFemenino->AutoSize = true;
+			this->rbtnFemenino->Location = System::Drawing::Point(265, 172);
+			this->rbtnFemenino->Name = L"rbtnFemenino";
+			this->rbtnFemenino->Size = System::Drawing::Size(71, 17);
+			this->rbtnFemenino->TabIndex = 49;
+			this->rbtnFemenino->TabStop = true;
+			this->rbtnFemenino->Text = L"Femenino";
+			this->rbtnFemenino->UseVisualStyleBackColor = true;
+			// 
+			// rbtnMasculino
+			// 
+			this->rbtnMasculino->AutoSize = true;
+			this->rbtnMasculino->Location = System::Drawing::Point(177, 172);
+			this->rbtnMasculino->Name = L"rbtnMasculino";
+			this->rbtnMasculino->Size = System::Drawing::Size(73, 17);
+			this->rbtnMasculino->TabIndex = 48;
+			this->rbtnMasculino->TabStop = true;
+			this->rbtnMasculino->Text = L"Masculino";
+			this->rbtnMasculino->UseVisualStyleBackColor = true;
+			// 
+			// btnDelete
+			// 
+			this->btnDelete->Location = System::Drawing::Point(726, 312);
+			this->btnDelete->Name = L"btnDelete";
+			this->btnDelete->Size = System::Drawing::Size(75, 23);
+			this->btnDelete->TabIndex = 50;
+			this->btnDelete->Text = L"Eliminar";
+			this->btnDelete->UseVisualStyleBackColor = true;
+			this->btnDelete->Click += gcnew System::EventHandler(this, &AlumnoForm::btnDelete_Click);
+			// 
+			// dtpIngreso
+			// 
+			this->dtpIngreso->Location = System::Drawing::Point(531, 9);
+			this->dtpIngreso->Name = L"dtpIngreso";
+			this->dtpIngreso->Size = System::Drawing::Size(200, 20);
+			this->dtpIngreso->TabIndex = 51;
+			// 
+			// btnUpdateAlumno
+			// 
+			this->btnUpdateAlumno->Location = System::Drawing::Point(546, 108);
+			this->btnUpdateAlumno->Name = L"btnUpdateAlumno";
+			this->btnUpdateAlumno->Size = System::Drawing::Size(75, 23);
+			this->btnUpdateAlumno->TabIndex = 52;
+			this->btnUpdateAlumno->Text = L"Actualizar Alumno";
+			this->btnUpdateAlumno->UseVisualStyleBackColor = true;
+			this->btnUpdateAlumno->Click += gcnew System::EventHandler(this, &AlumnoForm::btnUpdateAlumno_Click);
+			// 
 			// AlumnoForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(938, 605);
+			this->ClientSize = System::Drawing::Size(827, 596);
+			this->Controls->Add(this->btnUpdateAlumno);
+			this->Controls->Add(this->dtpIngreso);
+			this->Controls->Add(this->btnDelete);
+			this->Controls->Add(this->rbtnFemenino);
+			this->Controls->Add(this->rbtnMasculino);
+			this->Controls->Add(this->dtpNacimiento);
 			this->Controls->Add(this->btnQueryDNI);
 			this->Controls->Add(this->btnQueryCodigo);
 			this->Controls->Add(this->txtQueryDNI);
@@ -500,12 +593,9 @@ namespace SICOL_GUI {
 			this->Controls->Add(this->txtIdApoderado);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->txtCodigoAlumno);
-			this->Controls->Add(this->txtFechaIngreso);
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->label10);
-			this->Controls->Add(this->txtSexo);
 			this->Controls->Add(this->label5);
-			this->Controls->Add(this->txtFechaNacimiento);
 			this->Controls->Add(this->txtApMaterno);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label7);
@@ -530,28 +620,39 @@ namespace SICOL_GUI {
 		}
 #pragma endregion
 	public: void RefreshDGVAlumnos(){
-		List<Alumno^>^ productList = SICOLManager::QueryAllAlumnos();
-				//lstProducts->Items->Clear();
-				/*dgvAlumnos->Rows->Clear();
-				for (int i = 0; i < productList->Count; i++){
-					dgvAlumnos->Rows->Add(gcnew array<String^>{
-						"" + productList[i]->GetId(),
-							productList[i]->GetName(),
-							"" + productList[i]->GetPrice(),
-							"" + productList[i]->GetStock()});
-				}*/
-	}
-
+		List<Alumno^>^ listAlumnos = SICOLManager::QueryAllAlumnos();
+		dgvAlumnos->Rows->Clear();
+		for (int i = 0; i < listAlumnos->Count; i++){
+			dgvAlumnos->Rows->Add(gcnew array<String^>{
+				"" + listAlumnos[i]->id,
+					listAlumnos[i]->dni,
+					listAlumnos[i]->nombre,
+					listAlumnos[i]->apellido_Pa,
+					listAlumnos[i]->apellido_Ma,
+					listAlumnos[i]->fechaNacimiento,
+					Convert::ToString(listAlumnos[i]->sexo),
+					listAlumnos[i]->telefono,
+					listAlumnos[i]->direccion,
+					listAlumnos[i]->fechaIngreso,
+					listAlumnos[i]->codigo,
+				""+	listAlumnos[i]->apoderado->id});
+		}//Fin del For
+	}//Fin del Metodo RefreshDGVStaff
+	public:	int idAlumno;
 	private: System::Void btnAddAlumno_Click(System::Object^  sender, System::EventArgs^  e) { //Add
 		String^ dni = txtDni->Text;
 		String^ nombre = txtNombre->Text;
 		String^ ApPaterno = txtApPaterno->Text;
 		String^ ApMaterno = txtApMaterno->Text;
-		String^ fechaNacimiento = txtFechaNacimiento->Text;
-		String^ sexo = txtSexo->Text;
+		DateTime^ fechaNacimiento_Date = dtpNacimiento->Value;
+		String^ fechaNacimiento_String = fechaNacimiento_Date->ToString("dd/mm/yy");
+		char sexo;
+		if (rbtnMasculino->Checked) sexo = 'M';
+		if (rbtnFemenino->Checked) sexo = 'F';
 		String^ telefono = txtTelefono->Text;
 		String^ direccion = txtDireccion->Text;
-		String^ fechaIngreso = txtFechaIngreso->Text;
+		DateTime^ fechaIngreso_Date = dtpIngreso->Value;
+		String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd/mm/yy");
 		String^ CodigoAlumno = txtCodigoAlumno->Text;
 		String^ IdApoderado = txtIdApoderado->Text;
 
@@ -560,19 +661,58 @@ namespace SICOL_GUI {
 		a->nombre = nombre;
 		a->apellido_Pa = ApPaterno;
 		a->apellido_Ma = ApMaterno;
-		a->fechaNacimiento = fechaNacimiento;
-		a->sexo = Char::Parse(sexo);
+		a->fechaNacimiento = fechaNacimiento_String;
+		a->sexo = sexo;
 		a->telefono = telefono;
 		a->direccion = direccion;
-		a->fechaIngreso = fechaIngreso;
+		a->fechaIngreso = fechaIngreso_String;
 		a->codigo = CodigoAlumno;
 		a->apoderado->id = Int32::Parse(IdApoderado);
 		SICOLManager::AddAlumno(a);
-		//RefreshDGVProducts();
+		RefreshDGVAlumnos();
 	}//Fin Metodo ADD
 private: System::Void btnQueryCodigo_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void AlumnoForm_Load(System::Object^  sender, System::EventArgs^  e) {
+	RefreshDGVAlumnos();
+}
+private: System::Void btnUpdateAlumno_Click(System::Object^  sender, System::EventArgs^  e) {
+	String^ dni = txtDni->Text;
+	String^ nombre = txtNombre->Text;
+	String^ ApPaterno = txtApPaterno->Text;
+	String^ ApMaterno = txtApMaterno->Text;
+	DateTime^ fechaNacimiento_Date = dtpNacimiento->Value;
+	String^ fechaNacimiento_String = fechaNacimiento_Date->ToString("dd/mm/yy");
+	char sexo;
+	if (rbtnMasculino->Checked) sexo = 'M';
+	if (rbtnFemenino->Checked) sexo = 'F';
+	String^ telefono = txtTelefono->Text;
+	String^ direccion = txtDireccion->Text;
+	DateTime^ fechaIngreso_Date = dtpIngreso->Value;
+	String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd/mm/yy");
+	String^ CodigoAlumno = txtCodigoAlumno->Text;
+	String^ IdApoderado = txtIdApoderado->Text;
+
+	Alumno^ a = gcnew Alumno();
+	a = SICOLManager::QueryAlumnoById(idAlumno);
+	a->dni = dni;
+	a->nombre = nombre;
+	a->apellido_Pa = ApPaterno;
+	a->apellido_Ma = ApMaterno;
+	a->fechaNacimiento = fechaNacimiento_String;
+	a->sexo = sexo;
+	a->telefono = telefono;
+	a->direccion = direccion;
+	a->fechaIngreso = fechaIngreso_String;
+	a->codigo = CodigoAlumno;
+	a->apoderado->id = Int32::Parse(IdApoderado);
+	SICOLManager::UpdateAlumno(a);
+	RefreshDGVAlumnos();
+}
+private: System::Void dgvAlumnos_CellContentClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e);
+private: System::Void btnDelete_Click(System::Object^  sender, System::EventArgs^  e) {
+	SICOLManager::DeleteAlumno(idAlumno);
+	RefreshDGVAlumnos();
 }
 };
 }
