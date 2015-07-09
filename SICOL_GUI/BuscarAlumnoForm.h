@@ -1,5 +1,4 @@
 #pragma once
-//prueba1
 namespace SICOL_GUI {
 
 	using namespace System;
