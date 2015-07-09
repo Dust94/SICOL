@@ -27,7 +27,7 @@ namespace SICOL_Controller {
 			void Update(Salon^ s);
 			void Delete(int id); // /Delete by identificador "id" del Salon
 			Salon^ QueryById(int id); //Id = identificador = codigo del Salon
-			Salon^ QueryByNombre(String^ name);
+			Salon^ QueryLikeNombre(String^ name);
 			List<Salon^>^ QueryAll();
 			List<Salon^>^ QueryAllByCapicidad(int capacidad); //Busca los salones con capacidad mayor o igual a "capacidad"
 			void AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion);  //seccion = A,B char DB
@@ -55,7 +55,7 @@ namespace SICOL_Controller {
 			static void UpdateSalon(Salon^ s);
 			static void DeleteSalon(int id); 
 			static Salon^ QuerySalonById(int id);
-			static Salon^ QuerySalonByNombre(String^ name);
+			static Salon^ QuerySalonLikeNombre(String^ name);
 			static List<Salon^>^ QueryAllSalones();
 			static List<Salon^>^ QueryAllSalonesByCapicidad(int capacidad); //Busca los salones con capacidad menor o igual a "capacidad"
 			static void AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion);

@@ -569,7 +569,7 @@ Salon^ SalonDB::QueryById(int id){
 	conn->Close();
 	return s;
 }
-Salon^ SalonDB::QueryByNombre(String^ name){
+Salon^ SalonDB::QueryLikeNombre(String^ name){
 	SqlConnection^ conn;
 	conn = gcnew SqlConnection();
 	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
@@ -579,10 +579,10 @@ Salon^ SalonDB::QueryByNombre(String^ name){
 	SqlCommand^ comm = gcnew SqlCommand();
 	comm->Connection = conn;
 	comm->CommandText = "SELECT * FROM ROOM_2015_1 " +
-		"WHERE name=@p1";
+		"WHERE name LIKE @p1";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::VarChar);
-	p1->Value = name;
+	p1->Value = "%" + name + "%";
 	comm->Parameters->Add(p1);
 
 	//Paso 3: Ejecución de la sentencia
@@ -795,8 +795,8 @@ void SICOLManager::DeleteSalon(int id){
 Salon^ SICOLManager::QuerySalonById(int id){ 
 	return salones->QueryById(id);
 }
-Salon^ SICOLManager::QuerySalonByNombre(String^ name){
-	return salones->QueryByNombre(name);
+Salon^ SICOLManager::QuerySalonLikeNombre(String^ name){
+	return salones->QueryLikeNombre(name);
 }
 List<Salon^>^ SICOLManager::QueryAllSalones(){ 
 	return salones->QueryAll();
