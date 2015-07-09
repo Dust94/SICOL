@@ -669,7 +669,8 @@ namespace SICOL_GUI {
 		String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd-MM-yyyy");
 		String^ CodigoAlumno = txtCodigoAlumno->Text;
 		String^ IdApoderado = txtIdApoderado->Text;
-
+	
+		
 		lblprueba->Text = fechaIngreso_String;
 		Alumno^ a = gcnew Alumno();
 		a->apoderado = gcnew Apoderado();
@@ -684,6 +685,7 @@ namespace SICOL_GUI {
 		a->fechaIngreso = fechaIngreso_String;
 		a->codigo = CodigoAlumno;
 		a->apoderado->id = Int32::Parse(IdApoderado);
+		
 		SICOLManager::AddAlumno(a);
 		RefreshDGVAlumnos();
 	}//Fin Metodo ADD

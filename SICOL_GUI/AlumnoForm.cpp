@@ -20,6 +20,12 @@ System::Void AlumnoForm::dgvAlumnos_CellContentClick(System::Object^  sender,
 			rbtnMasculino->Checked = false;
 			rbtnFemenino->Checked = true;
 		}
+		DateTime fechaNacimiento_Date = DateTime::Parse(a->fechaNacimiento);
+		dtpNacimiento->Value = fechaNacimiento_Date;
+
+		DateTime fechaIngreso_Date = DateTime::Parse(a->fechaIngreso);
+		dtpIngreso->Value = fechaIngreso_Date;
+
 		txtDni->Text = a->dni;
 		txtNombre->Text = a->nombre;
 		txtApPaterno->Text = a->apellido_Pa;
