@@ -78,8 +78,9 @@ namespace SICOL_GUI {
 	private: System::Windows::Forms::Label^  label11;
 	private: System::Windows::Forms::TextBox^  txtQueryDNI;
 	private: System::Windows::Forms::Label^  label12;
-	private: System::Windows::Forms::Button^  btnQueryCodigo;
-	private: System::Windows::Forms::Button^  btnQueryDNI;
+	private: System::Windows::Forms::Button^  btnQueryAlumno;
+
+
 	private: System::Windows::Forms::DateTimePicker^  dtpNacimiento;
 	private: System::Windows::Forms::RadioButton^  rbtnFemenino;
 	private: System::Windows::Forms::RadioButton^  rbtnMasculino;
@@ -199,8 +200,7 @@ namespace SICOL_GUI {
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->txtQueryDNI = (gcnew System::Windows::Forms::TextBox());
 			this->label12 = (gcnew System::Windows::Forms::Label());
-			this->btnQueryCodigo = (gcnew System::Windows::Forms::Button());
-			this->btnQueryDNI = (gcnew System::Windows::Forms::Button());
+			this->btnQueryAlumno = (gcnew System::Windows::Forms::Button());
 			this->dtpNacimiento = (gcnew System::Windows::Forms::DateTimePicker());
 			this->rbtnFemenino = (gcnew System::Windows::Forms::RadioButton());
 			this->rbtnMasculino = (gcnew System::Windows::Forms::RadioButton());
@@ -229,7 +229,7 @@ namespace SICOL_GUI {
 			// 
 			// txtQueryCodigo
 			// 
-			this->txtQueryCodigo->Location = System::Drawing::Point(577, 221);
+			this->txtQueryCodigo->Location = System::Drawing::Point(577, 204);
 			this->txtQueryCodigo->Name = L"txtQueryCodigo";
 			this->txtQueryCodigo->Size = System::Drawing::Size(100, 20);
 			this->txtQueryCodigo->TabIndex = 24;
@@ -237,7 +237,7 @@ namespace SICOL_GUI {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(413, 221);
+			this->label3->Location = System::Drawing::Point(413, 204);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(158, 13);
 			this->label3->TabIndex = 23;
@@ -251,10 +251,11 @@ namespace SICOL_GUI {
 			this->btnQueryAlumnos->TabIndex = 21;
 			this->btnQueryAlumnos->Text = L"Consultar Alumnos";
 			this->btnQueryAlumnos->UseVisualStyleBackColor = true;
+			this->btnQueryAlumnos->Click += gcnew System::EventHandler(this, &AlumnoForm::btnQueryAlumnos_Click);
 			// 
 			// btnAddAlumno
 			// 
-			this->btnAddAlumno->Location = System::Drawing::Point(416, 108);
+			this->btnAddAlumno->Location = System::Drawing::Point(444, 127);
 			this->btnAddAlumno->Name = L"btnAddAlumno";
 			this->btnAddAlumno->Size = System::Drawing::Size(100, 23);
 			this->btnAddAlumno->TabIndex = 20;
@@ -484,7 +485,7 @@ namespace SICOL_GUI {
 			// 
 			// txtQueryDNI
 			// 
-			this->txtQueryDNI->Location = System::Drawing::Point(577, 256);
+			this->txtQueryDNI->Location = System::Drawing::Point(577, 239);
 			this->txtQueryDNI->Name = L"txtQueryDNI";
 			this->txtQueryDNI->Size = System::Drawing::Size(100, 20);
 			this->txtQueryDNI->TabIndex = 44;
@@ -492,30 +493,21 @@ namespace SICOL_GUI {
 			// label12
 			// 
 			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(413, 256);
+			this->label12->Location = System::Drawing::Point(413, 239);
 			this->label12->Name = L"label12";
 			this->label12->Size = System::Drawing::Size(144, 13);
 			this->label12->TabIndex = 43;
 			this->label12->Text = L"Consultar por DNI de Alumno";
 			// 
-			// btnQueryCodigo
+			// btnQueryAlumno
 			// 
-			this->btnQueryCodigo->Location = System::Drawing::Point(696, 218);
-			this->btnQueryCodigo->Name = L"btnQueryCodigo";
-			this->btnQueryCodigo->Size = System::Drawing::Size(100, 23);
-			this->btnQueryCodigo->TabIndex = 45;
-			this->btnQueryCodigo->Text = L"Consultar";
-			this->btnQueryCodigo->UseVisualStyleBackColor = true;
-			this->btnQueryCodigo->Click += gcnew System::EventHandler(this, &AlumnoForm::btnQueryCodigo_Click);
-			// 
-			// btnQueryDNI
-			// 
-			this->btnQueryDNI->Location = System::Drawing::Point(696, 256);
-			this->btnQueryDNI->Name = L"btnQueryDNI";
-			this->btnQueryDNI->Size = System::Drawing::Size(100, 23);
-			this->btnQueryDNI->TabIndex = 46;
-			this->btnQueryDNI->Text = L"Consultar";
-			this->btnQueryDNI->UseVisualStyleBackColor = true;
+			this->btnQueryAlumno->Location = System::Drawing::Point(494, 274);
+			this->btnQueryAlumno->Name = L"btnQueryAlumno";
+			this->btnQueryAlumno->Size = System::Drawing::Size(100, 23);
+			this->btnQueryAlumno->TabIndex = 45;
+			this->btnQueryAlumno->Text = L"Consultar";
+			this->btnQueryAlumno->UseVisualStyleBackColor = true;
+			this->btnQueryAlumno->Click += gcnew System::EventHandler(this, &AlumnoForm::btnQueryCodigo_Click);
 			// 
 			// dtpNacimiento
 			// 
@@ -565,7 +557,7 @@ namespace SICOL_GUI {
 			// 
 			// btnUpdateAlumno
 			// 
-			this->btnUpdateAlumno->Location = System::Drawing::Point(546, 108);
+			this->btnUpdateAlumno->Location = System::Drawing::Point(602, 127);
 			this->btnUpdateAlumno->Name = L"btnUpdateAlumno";
 			this->btnUpdateAlumno->Size = System::Drawing::Size(75, 23);
 			this->btnUpdateAlumno->TabIndex = 52;
@@ -577,7 +569,7 @@ namespace SICOL_GUI {
 			// 
 			this->lblprueba->AutoSize = true;
 			this->lblprueba->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->lblprueba->Location = System::Drawing::Point(416, 169);
+			this->lblprueba->Location = System::Drawing::Point(675, 47);
 			this->lblprueba->Name = L"lblprueba";
 			this->lblprueba->Size = System::Drawing::Size(2, 15);
 			this->lblprueba->TabIndex = 53;
@@ -594,8 +586,7 @@ namespace SICOL_GUI {
 			this->Controls->Add(this->rbtnFemenino);
 			this->Controls->Add(this->rbtnMasculino);
 			this->Controls->Add(this->dtpNacimiento);
-			this->Controls->Add(this->btnQueryDNI);
-			this->Controls->Add(this->btnQueryCodigo);
+			this->Controls->Add(this->btnQueryAlumno);
 			this->Controls->Add(this->txtQueryDNI);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->txtDireccion);
@@ -653,6 +644,103 @@ namespace SICOL_GUI {
 		}//Fin del For
 	}//Fin del Metodo RefreshDGVAlumnos
 	public:	int idAlumno;
+			Alumno^ a = gcnew Alumno();
+	public: bool ValidacionQuery(){
+		bool dni = String::Equals(txtQueryDNI->Text, ""); //Vacio = true. //Llenado = false
+		bool codigo = String::Equals(txtQueryCodigo->Text, ""); //Vacio = true. //Llenado = false
+		if (!codigo && !dni){
+			MessageBox::Show("Sólo debe ingresar un criterio de búsqueda");
+			return false;
+		}
+		if (!codigo && dni){ //Si solo se ha llenado el campo de codigo
+			String^ codigo = txtQueryCodigo->Text; //Codigo Ingresado por Usuario
+			a = SICOLManager::QueryAlumnoByCodigo(codigo);
+			if (a != nullptr) return true; //Se ha encontrado el usuario
+			else {
+				MessageBox::Show("El Codigo de Alumno es Incorrecto");
+				return false;
+			}
+		}
+		if (codigo && !dni){ //Si solo se ha llenado el campo de dni
+			String^ dni = txtQueryDNI->Text; //Codigo PUCP Ingresado por Usuario
+			a = SICOLManager::QueryAlumnoByDni(dni);
+			if (a != nullptr) return true; //Se ha encontrado el usuario
+			else {
+				MessageBox::Show("DNI Incorrecto");
+				return false;
+			}
+		}
+		if (codigo && dni){ //Si todos los campos estan vacios
+			MessageBox::Show("Ingrese algun Campo de Busqueda");
+			return false;
+		}
+	}// Fin de Metodo Validacion
+	public: void RefreshDGV_1Alumno(Alumno^ a){
+		dgvAlumnos->Rows->Clear();
+		String^ sexo_String = gcnew String(a->sexo, 1);
+		dgvAlumnos->Rows->Add(gcnew array<String^>{
+			"" + a->id,
+				a->dni,
+				a->nombre,
+				a->apellido_Pa,
+				a->apellido_Ma,
+				a->fechaNacimiento,
+				sexo_String,
+				a->telefono,
+				a->direccion,
+				a->fechaIngreso,
+				a->codigo,
+				"" + a->apoderado->id});
+	}//Fin del Metodo RefreshDGV_1Alumno
+	public: bool ValidacionAdd(){
+		bool dni = String::Equals(txtDni->Text, ""); //Vacio = true. //Llenado = false
+		bool nombre = String::Equals(txtNombre->Text, ""); //Vacio = true. //Llenado = false
+		bool ApPaterno = String::Equals(txtApPaterno->Text, ""); //Vacio = true. //Llenado = false
+		bool ApMaterno = String::Equals(txtApMaterno->Text, ""); //Vacio = true. //Llenado = false
+		bool telefono = String::Equals(txtTelefono->Text, ""); //Vacio = true. //Llenado = false
+		bool direccion = String::Equals(txtDireccion->Text, ""); //Vacio = true. //Llenado = false
+		bool CodigoAlumno = String::Equals(txtCodigoAlumno->Text, ""); //Vacio = true. //Llenado = false
+		bool IdApoderado = String::Equals(txtIdApoderado->Text, ""); //Vacio = true. //Llenado = false
+		if (dni){ //Si el Campo de dni esta vacio
+			MessageBox::Show("Por favor ingrese el Campo de DNI");
+			return false;
+		} else if (txtDni->Text->Length != 8){
+			MessageBox::Show("Campo DNI solicitado incompleto." +
+				" Recuerde que los lo Números DNI se definen de 8 numeros");
+			return false;
+		}
+		if (nombre){ //Si el Campo de dni esta vacio
+			MessageBox::Show("Por favor ingrese el Campo de Mombre");
+			return false;}
+		if (ApPaterno){ //Si el Campo de dni esta vacio
+			MessageBox::Show("Por favor ingrese el Campo de Apellido Paterno");
+			return false;}
+		if (ApMaterno){ //Si el Campo de dni esta vacio
+			MessageBox::Show("Por favor ingrese el Campo de Apellido Materno");
+			return false;}
+		if (telefono){ //Si el Campo de dni esta vacio
+			MessageBox::Show("Por favor ingrese el Campo de Telefono");
+			return false;}
+		if (direccion){ //Si el Campo de dni esta vacio
+			MessageBox::Show("Por favor ingrese el Campo de Direccion");
+			return false;}
+		if (CodigoAlumno){ //Si el Campo de CodigoAlumno esta vacio
+			MessageBox::Show("Por favor ingrese el Campo de Codigo de Alumno");
+			return false;
+		} else if (txtCodigoAlumno->Text->Length != 8){
+			MessageBox::Show("Campo Codigo de Alumno solicitado incompleto." +
+				" Recuerde que el Codigo de Alumno se define de 8 numeros");
+			return false;
+		}
+		if (IdApoderado){ //Si el Campo de dni esta vacio
+			MessageBox::Show("Por favor ingrese el Campo de Apoderado(id)");
+			return false;}
+		if (!(rbtnMasculino->Checked) && !(rbtnFemenino->Checked)){
+			MessageBox::Show("Por favor seleccione un Genero(Masculino o Femenino)");
+			return false;}
+		return true;
+	}// Fin de Metodo Validacion
+
 	private: System::Void btnAddAlumno_Click(System::Object^  sender, System::EventArgs^  e) { //Add
 		String^ dni = txtDni->Text;
 		String^ nombre = txtNombre->Text;
@@ -668,28 +756,34 @@ namespace SICOL_GUI {
 		DateTime^ fechaIngreso_Date = dtpIngreso->Value;
 		String^ fechaIngreso_String = fechaIngreso_Date->ToString("dd-MM-yyyy");
 		String^ CodigoAlumno = txtCodigoAlumno->Text;
-		String^ IdApoderado = txtIdApoderado->Text;
-	
+		String^ IdApoderado = txtIdApoderado->Text;	
 		
 		lblprueba->Text = fechaIngreso_String;
-		Alumno^ a = gcnew Alumno();
-		a->apoderado = gcnew Apoderado();
-		a->dni = dni;
-		a->nombre = nombre;
-		a->apellido_Pa = ApPaterno;
-		a->apellido_Ma = ApMaterno;
-		a->fechaNacimiento = fechaNacimiento_String;
-		a->sexo = sexo;
-		a->telefono = telefono;
-		a->direccion = direccion;
-		a->fechaIngreso = fechaIngreso_String;
-		a->codigo = CodigoAlumno;
-		a->apoderado->id = Int32::Parse(IdApoderado);
-		
-		SICOLManager::AddAlumno(a);
-		RefreshDGVAlumnos();
+		if (ValidacionAdd()){
+			Alumno^ a = gcnew Alumno();
+			a->apoderado = gcnew Apoderado();
+			a->dni = dni;
+			a->nombre = nombre;
+			a->apellido_Pa = ApPaterno;
+			a->apellido_Ma = ApMaterno;
+			a->fechaNacimiento = fechaNacimiento_String;
+			a->sexo = sexo;
+			a->telefono = telefono;
+			a->direccion = direccion;
+			a->fechaIngreso = fechaIngreso_String;
+			a->codigo = CodigoAlumno;
+			a->apoderado->id = Int32::Parse(IdApoderado);
+
+			SICOLManager::AddAlumno(a);
+			RefreshDGVAlumnos();
+		}//Fin del If		
 	}//Fin Metodo ADD
 private: System::Void btnQueryCodigo_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (ValidacionQuery()){
+		RefreshDGV_1Alumno(a);
+	}
+	else MessageBox::Show("No se ha encontrado al Alumno");
+
 }
 private: System::Void AlumnoForm_Load(System::Object^  sender, System::EventArgs^  e) {
 	RefreshDGVAlumnos();
@@ -731,6 +825,9 @@ private: System::Void btnUpdateAlumno_Click(System::Object^  sender, System::Eve
 private: System::Void dgvAlumnos_CellContentClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e);
 private: System::Void btnDelete_Click(System::Object^  sender, System::EventArgs^  e) {
 	SICOLManager::DeleteAlumno(idAlumno);
+	RefreshDGVAlumnos();
+}
+private: System::Void btnQueryAlumnos_Click(System::Object^  sender, System::EventArgs^  e) {
 	RefreshDGVAlumnos();
 }
 };
