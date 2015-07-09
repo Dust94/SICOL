@@ -1,5 +1,4 @@
 // Archivo DLL principal.
-
 #include "stdafx.h"
 #include "SICOL_Controller.h"
 
@@ -8,7 +7,9 @@ using namespace System::IO;
 using namespace System::Runtime::Serialization;
 using namespace System::Runtime::Serialization::Formatters::Binary;
 using namespace System::Data::SqlClient;
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////// Metodos de la Clase AlumnoDB  /////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void AlumnoDB::Add(Alumno ^ a){
 	//Paso 1: Obtener la conexión
 	SqlConnection^ conn;
@@ -75,7 +76,6 @@ void AlumnoDB::Add(Alumno ^ a){
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
 }//Fin Metodo Add() de AlumnoDB
-
 void AlumnoDB::Update(Alumno^ a){
 	//Paso 1: Obtener la conexión
 	SqlConnection^ conn;
@@ -142,7 +142,6 @@ void AlumnoDB::Update(Alumno^ a){
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
 }//Fin Metodo Update() de AlumnoDB
-
 void AlumnoDB::Delete(String^ name){
 	SqlConnection^ conn;
 	conn = gcnew SqlConnection();
@@ -166,7 +165,6 @@ void AlumnoDB::Delete(String^ name){
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
 }//Fin Metodo Delete() de AlumnoDB
-
 Alumno^ AlumnoDB::QueryByCodigo(int codigo){
 	//Paso 1: Obtener la conexión
 	SqlConnection^ conn;
@@ -219,7 +217,6 @@ Alumno^ AlumnoDB::QueryByCodigo(int codigo){
 	conn->Close();
 	return a;
 }//Fin Metodo QueryByCodigo() de AlumnoDB
-
 Alumno^ AlumnoDB::QueryByDni(int dni){
 	//Paso 1: Obtener la conexión
 	SqlConnection^ conn;
@@ -321,9 +318,11 @@ List<Alumno^>^ AlumnoDB::QueryAllAlumnos(){
 	//Devuelvo la lista de Alumnos
 	return listAlumnos;
 }
-//Fin de Metodos de la Clase AlumnoDB
+//////////////////////////////// Fin Metodos de la Clase AlumnoDB  /////////////////////////////////////////////////////////////
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////// Metodos de la Clase SalonDB  //////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SalonDB::Add(Salon^ s){
 	//Paso 1: Obtener la conexión
 	SqlConnection^ conn;
@@ -685,10 +684,12 @@ void SalonDB::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){ // s
 	conn->Close();
 
 }
-//Fin de Metodos de la Clase SalonDB
+//////////////////////////////// Fin Metodos de la Clase SalonDB  /////////////////////////////////////////////////////////////
 
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////// Metodos Estaticos de la Clase SICOLManager  ///////////////////////////////////////////////
+//////////////// Metodos Estaticos para la Clase AlumnoDB dentro de la Clase SICOLManager //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SICOLManager::AddAlumno(Alumno^ a){
 	Alumnos->Add(a);
 	PersistToXMLFileAlumnoDB();
@@ -713,6 +714,9 @@ List<Alumno^>^ SICOLManager::QueryAllAlumnos(){
 	return Alumnos->QueryAllAlumnos();
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////// Metodos Estaticos para la Clase SalonDB dentro de la Clase SICOLManager //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SICOLManager::AddSalon(Salon^ s){
 	salones->Add(s);
 }
