@@ -12,7 +12,14 @@ System::Void AlumnoForm::dgvAlumnos_CellContentClick(System::Object^  sender,
 		idAlumno = Int32::Parse(idAlumno_String);
 
 		Alumno^ a = SICOLManager::QueryAlumnoById(idAlumno);
-
+		if (a->sexo == 'M') {
+			rbtnMasculino->Checked = true;
+			rbtnFemenino->Checked = false;
+		}
+		if (a->sexo == 'F') {
+			rbtnMasculino->Checked = false;
+			rbtnFemenino->Checked = true;
+		}
 		txtDni->Text = a->dni;
 		txtNombre->Text = a->nombre;
 		txtApPaterno->Text = a->apellido_Pa;

@@ -1,6 +1,7 @@
 // Archivo DLL principal.
 #include "stdafx.h"
 #include "SICOL_Controller.h"
+#include <vcclr.h>
 
 using namespace SICOL_Controller;
 using namespace System::IO;
