@@ -13,7 +13,7 @@ namespace SICOL_Library {
 		String^ apellido_Pa;
 		String^ apellido_Ma;
 		String^ fechaNacimiento; //DateTime^ nacimiento;
-		String^ sexo;
+		String^ sexo; // Masculino o Femenino
 		int telefono;
 		String^ direccion;
 	}; // Fin Clase Persona
