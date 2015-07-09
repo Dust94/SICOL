@@ -227,7 +227,7 @@ namespace SICOL_GUI {
 							alumnos[i]->apellido_Pa,
 							alumnos[i]->apellido_Ma,
 							alumnos[i]->fechaNacimiento,
-							alumnos[i]->sexo,
+						"" + alumnos[i]->sexo,
 							"" + alumnos[i]->codigo});
 				}
 	}// Fin de Metodo RefreshDGVPAlumnos
@@ -239,7 +239,7 @@ namespace SICOL_GUI {
 								alumno->apellido_Pa,
 								alumno->apellido_Ma,
 								alumno->fechaNacimiento,
-								alumno->sexo,
+							"" + alumno->sexo,
 								"" + alumno->codigo});
 	}// Fin de Metodo RefreshDGVP1Alumno
 

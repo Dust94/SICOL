@@ -542,7 +542,7 @@ namespace SICOL_GUI {
 				}*/
 	}
 
-	private: System::Void btnAddAlumno_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void btnAddAlumno_Click(System::Object^  sender, System::EventArgs^  e) { //Add
 		String^ dni = txtDni->Text;
 		String^ nombre = txtNombre->Text;
 		String^ ApPaterno = txtApPaterno->Text;
@@ -561,13 +561,12 @@ namespace SICOL_GUI {
 		a->apellido_Pa = ApPaterno;
 		a->apellido_Ma = ApMaterno;
 		a->fechaNacimiento = fechaNacimiento;
-		a->sexo = sexo;
-		a->telefono = Int32::Parse(telefono);
+		a->sexo = Char::Parse(sexo);
+		a->telefono = telefono;
 		a->direccion = direccion;
 		a->fechaIngreso = fechaIngreso;
-		a->codigo = Int32::Parse(CodigoAlumno);
+		a->codigo = CodigoAlumno;
 		a->apoderado->id = Int32::Parse(IdApoderado);
-
 		SICOLManager::AddAlumno(a);
 		//RefreshDGVProducts();
 	}//Fin Metodo ADD
