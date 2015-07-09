@@ -411,11 +411,11 @@ void SalonDB::Add(Salon^ s){
 	SqlParameter^ p5 = gcnew SqlParameter("@p5",
 		System::Data::SqlDbType::Int);
 	SqlParameter^ p6 = gcnew SqlParameter("@p6",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Char, 1);
 	SqlParameter^ p7 = gcnew SqlParameter("@p7",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Char, 1);
 	SqlParameter^ p8 = gcnew SqlParameter("@p8",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Char, 1);
 
 	//Le paso los valores del objeto Salon a los parametros pi
 	p1->Value = s->nombre;
@@ -423,9 +423,9 @@ void SalonDB::Add(Salon^ s){
 	p3->Value = s->tipo_Aula;
 	p4->Value = s->tipo_Pizarra;
 	p5->Value = s->piso;
-	p6->Value = s->estado;
-	p7->Value = safe_cast<char>(s->proyector);
-	p8->Value = safe_cast<char>(s->wifi);
+	p6->Value = gcnew String(s->estado, 1);
+	p7->Value = gcnew String(s->proyector, 1);
+	p8->Value = gcnew String(s->wifi, 1);
 
 	//Paso los Valores a la Base de Datos
 	comm->Parameters->Add(p1);
@@ -467,13 +467,13 @@ void SalonDB::Update(Salon^ s){
 	SqlParameter^ p5 = gcnew SqlParameter("@p5",
 		System::Data::SqlDbType::Int);
 	SqlParameter^ p6 = gcnew SqlParameter("@p6",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Char, 1);
 	SqlParameter^ p7 = gcnew SqlParameter("@p7",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Char, 1);
 	SqlParameter^ p8 = gcnew SqlParameter("@p8",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Char, 1);
 	SqlParameter^ p9 = gcnew SqlParameter("@p9",
-		System::Data::SqlDbType::Char);
+		System::Data::SqlDbType::Int);
 
 	//Le paso los valores del objeto Salon a los parametros pi
 	p1->Value = s->nombre;
@@ -481,9 +481,9 @@ void SalonDB::Update(Salon^ s){
 	p3->Value = s->tipo_Aula;
 	p4->Value = s->tipo_Pizarra;
 	p5->Value = s->piso;
-	p6->Value = s->estado;
-	p7->Value = safe_cast<char>(s->proyector);
-	p8->Value = safe_cast<char>(s->wifi);
+	p6->Value = gcnew String(s->estado, 1);
+	p7->Value = gcnew String(s->proyector, 1);
+	p8->Value = gcnew String(s->wifi, 1);
 	p9->Value = s->id;
 
 	//Paso los Valores a la Base de Datos
@@ -514,7 +514,7 @@ void SalonDB::Delete(int id){
 	comm->CommandText = "DELETE FROM ROOM_2015_1 " +
 		"WHERE id=@p1";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
-		System::Data::SqlDbType::VarChar);
+		System::Data::SqlDbType::Int);
 
 	p1->Value = id;
 	comm->Parameters->Add(p1);
@@ -524,7 +524,7 @@ void SalonDB::Delete(int id){
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
 }
-Salon^ SalonDB::QueryByCodigo(int codigo){
+Salon^ SalonDB::QueryById(int id){
 	SqlConnection^ conn;
 	conn = gcnew SqlConnection();
 	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
@@ -537,7 +537,7 @@ Salon^ SalonDB::QueryByCodigo(int codigo){
 		"WHERE id=@p1";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::Int);
-	p1->Value = codigo;
+	p1->Value = id;
 	comm->Parameters->Add(p1);
 
 	//Paso 3: Ejecución de la sentencia
@@ -558,11 +558,11 @@ Salon^ SalonDB::QueryByCodigo(int codigo){
 		if (dr["level"] != System::DBNull::Value)
 			s->piso = (int)dr["level"];
 		if (dr["state"] != System::DBNull::Value)
-			s->estado = safe_cast<String^>(dr["state"]);
+			s->estado = safe_cast<String ^>(dr["state"])[0];
 		if (dr["hasMultimediaProjector"] != System::DBNull::Value)
-			s->proyector = safe_cast<char>(dr["hasMultimediaProjector"]);
+			s->proyector = safe_cast<String ^>(dr["hasMultimediaProjector"])[0];
 		if (dr["hasWifi"] != System::DBNull::Value)
-			s->wifi = safe_cast<char>(dr["hasWifi"]);
+			s->wifi = safe_cast<String ^>(dr["hasWifi"])[0];
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
 	dr->Close();
@@ -579,7 +579,7 @@ Salon^ SalonDB::QueryByNombre(String^ name){
 	SqlCommand^ comm = gcnew SqlCommand();
 	comm->Connection = conn;
 	comm->CommandText = "SELECT * FROM ROOM_2015_1 " +
-		"WHERE id=@p1";
+		"WHERE name=@p1";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::VarChar);
 	p1->Value = name;
@@ -603,11 +603,11 @@ Salon^ SalonDB::QueryByNombre(String^ name){
 		if (dr["level"] != System::DBNull::Value)
 			s->piso = (int)dr["level"];
 		if (dr["state"] != System::DBNull::Value)
-			s->estado = safe_cast<String^>(dr["state"]);
+			s->estado = safe_cast<String ^>(dr["state"])[0];
 		if (dr["hasMultimediaProjector"] != System::DBNull::Value)
-			s->proyector = safe_cast<char>(dr["hasMultimediaProjector"]);
+			s->proyector = safe_cast<String ^>(dr["hasMultimediaProjector"])[0];
 		if (dr["hasWifi"] != System::DBNull::Value)
-			s->wifi = safe_cast<char>(dr["hasWifi"]);
+			s->wifi = safe_cast<String ^>(dr["hasWifi"])[0];
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
 	dr->Close();
@@ -643,11 +643,11 @@ List<Salon^>^ SalonDB::QueryAll(){
 		if (dr["level"] != System::DBNull::Value)
 			s->piso = (int)dr["level"];
 		if (dr["state"] != System::DBNull::Value)
-			s->estado = safe_cast<String^>(dr["state"]);
+			s->estado = safe_cast<String ^>(dr["state"])[0];
 		if (dr["hasMultimediaProjector"] != System::DBNull::Value)
-			s->proyector = (char)dr["hasMultimediaProjector"];
+			s->proyector = safe_cast<String ^>(dr["hasMultimediaProjector"])[0];
 		if (dr["hasWifi"] != System::DBNull::Value)
-			s->wifi = (char)dr["hasWifi"];
+			s->wifi = safe_cast<String ^>(dr["hasWifi"])[0];
 		SalonesList->Add(s);
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
@@ -689,11 +689,11 @@ List<Salon^>^ SalonDB::QueryAllByCapicidad(int capacidad){
 		if (dr["level"] != System::DBNull::Value)
 			s->piso = (int)dr["level"];
 		if (dr["state"] != System::DBNull::Value)
-			s->estado = safe_cast<String^>(dr["state"]);
+			s->estado = safe_cast<String ^>(dr["state"])[0];
 		if (dr["hasMultimediaProjector"] != System::DBNull::Value)
-			s->proyector = safe_cast<char>(dr["hasMultimediaProjector"]);
+			s->proyector = safe_cast<String ^>(dr["hasMultimediaProjector"])[0];
 		if (dr["hasWifi"] != System::DBNull::Value)
-			s->wifi = safe_cast<char>(dr["hasWifi"]);
+			s->wifi = safe_cast<String ^>(dr["hasWifi"])[0];
 		SalonesList->Add(s);
 	}
 	//Paso 4: Cerramos el dataReader y la conexión con la BD
@@ -792,8 +792,8 @@ void SICOLManager::UpdateSalon(Salon^ s){
 void SICOLManager::DeleteSalon(int id){
 	salones->Delete(id);
 }
-Salon^ SICOLManager::QuerySalonByCodigo(int codigo){ 
-	return salones->QueryByCodigo(codigo);
+Salon^ SICOLManager::QuerySalonById(int id){ 
+	return salones->QueryById(id);
 }
 Salon^ SICOLManager::QuerySalonByNombre(String^ name){
 	return salones->QueryByNombre(name);

@@ -62,17 +62,17 @@ namespace SICOL_Library {
 			List<Seccion^>^ Secciones; //Todas las secciones de un Grado. Ejem: 1A, 1B, 1C, 1D
 	}; // Fin Clase Grado
 
-	public ref class Salon // A106, A108, etc Para el Curso es igual a la Seccion.
+	public ref class Salon // A106, A108, etc. Relacion de 1 a 1 (Seccion - Salon)
 	{
 		public:
 			int id;
 			String^ nombre; // A106, A108, etc 
 			int capacidad; //Cuantas alumnos caben en un salon
-			String^ tipo_Aula; //Aula o Laboratorio
+			String^ tipo_Aula; //Aula o Laboratorio. type en DB
 			String^ tipo_Pizarra; //Acrilica o Para Tiza
-			int piso; //1 piso , 2 piso	
-			String^ estado; //activo o inactivo
-			char proyector; //Y,N
-			char wifi; //Y,N
+			int piso; //1 piso , 2 piso. level en DB
+			char estado; //activo(A) o inactivo(I). state en DB
+			char proyector; //Yes(Y),No(N)
+			char wifi; //Yes(Y),No(N)
 	}; // Fin Clase Salon
 }
