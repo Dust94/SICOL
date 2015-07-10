@@ -701,7 +701,7 @@ List<Salon^>^ SalonDB::QueryAllByCapicidad(int capacidad){
 	conn->Close();
 	return SalonesList;
 }
-void SalonDB::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){ // seccion = A,B,C
+/*void SalonDB::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){ // seccion = A,B,C
 	//Paso 1: Obtener la conexión
 	SqlConnection^ conn;
 	conn = gcnew SqlConnection();
@@ -747,7 +747,7 @@ void SalonDB::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){ // s
 	comm->ExecuteNonQuery();
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
-}
+}*/
 //////////////////////////////// Fin Metodos de la Clase SalonDB  /////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1128,8 +1128,7 @@ void SeccionDB::AddAlumnoBySeccion(Grado^ g, char idSection, int idAlumno){
 	SqlCommand^ comm = gcnew SqlCommand();
 	comm->Connection = conn;
 	comm->CommandText = "INSERT INTO STUDENTS_BY_SECTION " +
-		"(idGrade, year, level, idSection, idStudent, status) VALUES (@p1,@p2,@p3,@p4,@p5,@p6); " +
-		"SELECT  SCOPE_IDENTITY()";
+		"(idGrade, year, level, idSection, idStudent, status) VALUES (@p1,@p2,@p3,@p4,@p5,@p6); ";
 	SqlParameter^ p1 = gcnew SqlParameter("@p1",
 		System::Data::SqlDbType::Int);
 	SqlParameter^ p2 = gcnew SqlParameter("@p2",
@@ -1217,9 +1216,9 @@ List<Salon^>^ SICOLManager::QueryAllSalones(){
 List<Salon^>^ SICOLManager::QueryAllSalonesByCapicidad(int capacidad){
 	return salones->QueryAllByCapicidad(capacidad);
 }
-void SICOLManager::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){
+/*void SICOLManager::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){
 	salones->AddAlumnoBySeccion(a, grado, seccion);
-}
+}*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////// Metodos Estaticos para la Clase GradoDB dentro de la Clase SICOLManager //////////////////////////////////

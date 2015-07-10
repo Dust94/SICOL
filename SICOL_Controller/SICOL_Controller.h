@@ -30,7 +30,7 @@ namespace SICOL_Controller {
 			Salon^ QueryLikeNombre(String^ name);
 			List<Salon^>^ QueryAll();
 			List<Salon^>^ QueryAllByCapicidad(int capacidad); //Busca los salones con capacidad mayor o igual a "capacidad"
-			void AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion);  //seccion = A,B char DB
+			//void AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion);  //seccion = A,B char DB
 	};
 
 	public ref class GradoDB{
@@ -82,7 +82,7 @@ namespace SICOL_Controller {
 			static Salon^ QuerySalonLikeNombre(String^ name);
 			static List<Salon^>^ QueryAllSalones();
 			static List<Salon^>^ QueryAllSalonesByCapicidad(int capacidad); //Busca los salones con capacidad menor o igual a "capacidad"
-			static void AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion);
+			//static void AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion);
 
 			//Metodos Estaticos de para GradoDB 
 			static void AddGrado(Grado^ g);

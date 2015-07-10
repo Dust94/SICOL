@@ -359,6 +359,17 @@ private: System::Void btnMatricular_Click(System::Object^  sender, System::Event
 	int añoAcademico = Int32::Parse(txtAño->Text);
 	String^ nivel = combNivel->Text; //Primaria o Secundaria
 	char idSeccion = txtSeccion->Text[0];
-}
+	Grado^ g = gcnew Grado();
+	g->id = idGrado;
+	g->año_academico = añoAcademico;
+	g->nivel = nivel;
+
+	for (int i = 0; i < dgvAlumnos->Rows->Count - 1; i++){
+		int idAlumno = Int32::Parse(dgvAlumnos->Rows[i]->Cells[0]->Value->ToString());
+		SICOLManager::AddAlumnoBySeccion(g, idSeccion, idAlumno);
+		MessageBox::Show("Alumno con id: " + idAlumno + " ha sido matriculado satisfactoriamente");
+	}//Fin del For	
+
+}//Fin del Metodo Matricular
 };
 }
