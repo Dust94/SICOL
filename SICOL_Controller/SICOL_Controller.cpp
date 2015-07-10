@@ -747,7 +747,6 @@ void SalonDB::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){ // s
 	comm->ExecuteNonQuery();
 	//Paso 4: Cerramos la conexión con la BD
 	conn->Close();
-
 }
 //////////////////////////////// Fin Metodos de la Clase SalonDB  /////////////////////////////////////////////////////////////
 
@@ -1118,6 +1117,51 @@ List<Seccion^>^ SeccionDB::QueryAll(){
 	conn->Close();
 	return SeccionesList;
 }
+void SeccionDB::AddAlumnoBySeccion(Grado^ g, char idSection, int idAlumno){
+	//Paso 1: Obtener la conexión
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "INSERT INTO STUDENTS_BY_SECTION " +
+		"(idGrade, year, level, idSection, idStudent, status) VALUES (@p1,@p2,@p3,@p4,@p5,@p6); " +
+		"SELECT  SCOPE_IDENTITY()";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p2 = gcnew SqlParameter("@p2",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p3 = gcnew SqlParameter("@p3",
+		System::Data::SqlDbType::VarChar);
+	SqlParameter^ p4 = gcnew SqlParameter("@p4",
+		System::Data::SqlDbType::Char, 1);
+	SqlParameter^ p5 = gcnew SqlParameter("@p5",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p6 = gcnew SqlParameter("@p6",
+		System::Data::SqlDbType::VarChar);
+	//Le paso los valores del objeto Alumno a los parametros pi
+	p1->Value = g->id;
+	p2->Value = g->año_academico;
+	p3->Value = g->nivel;
+	p4->Value = gcnew String(idSection, 1); //A,B nombre de Seccion = idSection
+	p5->Value = idAlumno; // idAlumno
+	p6->Value = "MATRICULADO";
+
+	//Paso los Valores a la Base de Datos
+	comm->Parameters->Add(p1);
+	comm->Parameters->Add(p2);
+	comm->Parameters->Add(p3);
+	comm->Parameters->Add(p4);
+	comm->Parameters->Add(p5);
+	comm->Parameters->Add(p6);
+	//Paso 3: Ejecución de la sentencia
+	comm->ExecuteNonQuery();
+	//Paso 4: Cerramos la conexión con la BD
+	conn->Close();
+}
 //////////////////////////////// Fin Metodos de la Clase SeccionDB  /////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1126,11 +1170,11 @@ List<Seccion^>^ SeccionDB::QueryAll(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SICOLManager::AddAlumno(Alumno^ a){
 	Alumnos->Add(a);
-	PersistToXMLFileAlumnoDB();
+	//PersistToXMLFileAlumnoDB();
 }
 void SICOLManager::UpdateAlumno(Alumno^ a){
 	Alumnos->Update(a);
-	PersistToXMLFileAlumnoDB();
+	//PersistToXMLFileAlumnoDB();
 }
 void SICOLManager::DeleteAlumno(int id){
 	Alumnos->Delete(id);
@@ -1145,7 +1189,7 @@ Alumno^ SICOLManager::QueryAlumnoByDni(String^ dni){
 	return Alumnos->QueryByDni(dni);
 }
 List<Alumno^>^ SICOLManager::QueryAllAlumnos(){
-	LoadFromXMLFileAlumnoDB();
+	//LoadFromXMLFileAlumnoDB();
 	return Alumnos->QueryAllAlumnos();
 }
 
@@ -1197,7 +1241,7 @@ List<Grado^>^ SICOLManager::QueryAllGrados(){
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////// Metodos Estaticos para la Clase GradoDB dentro de la Clase SICOLManager //////////////////////////////////
+//////////////// Metodos Estaticos para la Clase SeccionDB dentro de la Clase SICOLManager //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void SICOLManager::AddSeccion(Grado^ g, Seccion^ s){
 	secciones->Add(g, s);
@@ -1217,6 +1261,13 @@ List<Seccion^>^ SICOLManager::QueryAllSeccionByGrado(Grado^ g){
 List<Seccion^>^ SICOLManager::QueryAllSeccion(){
 	return  secciones->QueryAll();
 }
+void SICOLManager::AddAlumnoBySeccion(Grado^ g, char idSection, int idAlumno){
+	secciones->AddAlumnoBySeccion(g, idSection, idAlumno);
+}
+
+
+
+
 
 
 
@@ -1251,12 +1302,6 @@ void SICOLManager::LoadFromXMLFileAlumnoDB() {
 	}
 }
 //Fin de Metodos de la Clase SICOLManager
-
-
-
-
-
-
 
 
 

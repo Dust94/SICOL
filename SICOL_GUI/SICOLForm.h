@@ -166,9 +166,9 @@ private: System::Void matriculaToolStripMenuItem_Click(System::Object^  sender, 
 		 sForm->Show();
 }
 private: System::Void buscarAlumnoToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-		BuscarAlumnosForm^ sForm = gcnew BuscarAlumnosForm();
+		/*BuscarAlumnosForm^ sForm = gcnew BuscarAlumnosForm(); //Necesito pasarle una MatriculaForm
 		sForm->MdiParent = this;
-		sForm->Show();
+		sForm->Show();*/
 }
 };
 }

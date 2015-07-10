@@ -53,6 +53,7 @@ namespace SICOL_Controller {
 			Seccion^ QueryById(char idSection);
 			List<Seccion^>^ QueryAllByGrado(Grado^ g);
 			List<Seccion^>^ QueryAll();
+			void AddAlumnoBySeccion(Grado^ g, char idSection, int idAlumno); //Agrega un Alumno a Seccion de un Grado "g"
 	};
 
 	public ref class SICOLManager {
@@ -97,6 +98,7 @@ namespace SICOL_Controller {
 			static Seccion^ QuerySeccionById(char idSection);
 			static List<Seccion^>^ QueryAllSeccionByGrado(Grado^ g);
 			static List<Seccion^>^ QueryAllSeccion();
+			static void AddAlumnoBySeccion(Grado^ g, char idSection, int idAlumno);
 	};
 
 	public ref class GradoManager {
