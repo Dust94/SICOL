@@ -11,12 +11,14 @@ namespace SICOL_GUI {
 	using namespace SICOL_Library;
 	using namespace SICOL_Controller;
 	using namespace System::Collections::Generic;
+	using namespace System::Threading;
 
 	/// <summary>
 	/// Resumen de MatriculaForm
 	/// </summary>
 	public ref class MatriculaForm : public System::Windows::Forms::Form
 	{
+	private: Thread ^ myThread; //Creo un hilo
 	public:
 		MatriculaForm(void)
 		{
@@ -24,6 +26,37 @@ namespace SICOL_GUI {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			//Inicializo mi hilo "myThread" con el constructor Thread()
+			//ThreadStart == delegado. Puntero a Metodo
+			//ThreadStart es un delegado para Trehad que apuntara a un metodo que se va a ejecutar cuando el hilo empiece a correr.
+			/*Cuando se crea un subproceso administrado, 
+			el método que se ejecuta en el subproceso queda representado por un delegado ThreadStart o ParameterizedThreadStart
+			que se haya pasado al constructor Thread. 
+			Pero el subproceso no comenzará a ejecutarse hasta que se llame al método Thread::Start. 
+			La ejecución comenzará en la primera línea del método representado por el delegado ThreadStart o ParameterizedThreadStart.*/
+			//ThreadStart() = argumento = metodo que se ejecutara cuando el hilo comience a correr.
+			myThread = gcnew Thread(gcnew ThreadStart(this, &MatriculaForm::MyRun));
+			myThread->Start(); //Empieza a correr el hilo
+		}
+		void MyRun(){ //Desde este hilo(algoritmo del hilo == metodo) 
+			//no puedo acceder a los datos de otro hilo(hilo de esta ventana). Por eso se utiliza Invoke
+			Thread::Sleep(2000);
+			while (true) {
+				DateTime^ now = DateTime::Now;
+				// Invoke() recive como parametro un nuevo delegado y una cadena de caracteres. Para poder llamar a ciertos delegados.
+				// A traves de Invoke puedo llamar a un metodo del hilo de la ventana.
+				Invoke(gcnew delegateUpdateTitle(this, &MatriculaForm::UpdateTitle), //Crea una instancia de la definicion del delegado "delegateUpdateTitle"
+					gcnew array<String^>{"Matricula " + now->ToString("hh:mm:ss")});
+				Thread::Sleep(1000); //en milisegundos
+				if (!this->Visible)
+					return;
+			}
+		}
+		//Cualquier metodo que reciva como parametro un String
+		delegate void delegateUpdateTitle(String^); //Definicion de un Delegado
+
+		void UpdateTitle(String ^newTitle){
+			this->Text = newTitle;
 		}
 
 	protected:
@@ -69,6 +102,7 @@ namespace SICOL_GUI {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  ingreso;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  codigo;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  apoderado;
+	private: System::Windows::Forms::Button^  btnDeleteAlumno;
 
 
 
@@ -113,6 +147,7 @@ namespace SICOL_GUI {
 			this->ingreso = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->codigo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->apoderado = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btnDeleteAlumno = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvAlumnos))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -283,11 +318,22 @@ namespace SICOL_GUI {
 			this->apoderado->HeaderText = L"Apoderado";
 			this->apoderado->Name = L"apoderado";
 			// 
+			// btnDeleteAlumno
+			// 
+			this->btnDeleteAlumno->Location = System::Drawing::Point(541, 107);
+			this->btnDeleteAlumno->Name = L"btnDeleteAlumno";
+			this->btnDeleteAlumno->Size = System::Drawing::Size(107, 23);
+			this->btnDeleteAlumno->TabIndex = 21;
+			this->btnDeleteAlumno->Text = L"Eliminar Alumno";
+			this->btnDeleteAlumno->UseVisualStyleBackColor = true;
+			this->btnDeleteAlumno->Click += gcnew System::EventHandler(this, &MatriculaForm::btnDeleteAlumno_Click);
+			// 
 			// MatriculaForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(672, 431);
+			this->Controls->Add(this->btnDeleteAlumno);
 			this->Controls->Add(this->dgvAlumnos);
 			this->Controls->Add(this->combNivel);
 			this->Controls->Add(this->btnMatricular);
@@ -371,5 +417,19 @@ private: System::Void btnMatricular_Click(System::Object^  sender, System::Event
 	}//Fin del For	
 
 }//Fin del Metodo Matricular
+private: System::Void btnDeleteAlumno_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (dgvAlumnos->CurrentCell != nullptr &&
+		dgvAlumnos->CurrentCell->Value != nullptr &&
+		dgvAlumnos->CurrentCell->Value->ToString() != "") {
+
+		Int32 rowToDelete = dgvAlumnos->Rows->GetFirstRow(
+			DataGridViewElementStates::Selected);
+		if (rowToDelete > -1)
+		{
+			this->dgvAlumnos->Rows->RemoveAt(rowToDelete);
+		}
+
+	}
+}
 };
 }
