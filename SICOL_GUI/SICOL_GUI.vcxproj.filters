@@ -27,6 +27,9 @@
     <ClCompile Include="MatriculaForm.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="BuscarAlumnosForm.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlumnoForm.h">
@@ -41,6 +44,9 @@
     <ClInclude Include="MatriculaForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="BuscarAlumnosForm.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AlumnoForm.resx">
@@ -53,9 +59,6 @@
       <Filter>Archivos de recursos</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="MatriculaForm.resx">
-      <Filter>Archivos de recursos</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BuscarAlumnoForm.resx">
       <Filter>Archivos de recursos</Filter>
     </EmbeddedResource>
   </ItemGroup>

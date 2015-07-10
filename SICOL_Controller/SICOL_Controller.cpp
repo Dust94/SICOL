@@ -752,6 +752,375 @@ void SalonDB::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){ // s
 //////////////////////////////// Fin Metodos de la Clase SalonDB  /////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////// Metodos de la Clase GradoDB  //////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void GradoDB::Add(Grado^ g){
+	//Paso 1: Obtener la conexión
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "INSERT INTO GRADE " +
+		"(year, level) VALUES (@p1,@p2)";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p2 = gcnew SqlParameter("@p2",
+		System::Data::SqlDbType::VarChar);
+
+	//Le paso los valores del objeto Salon a los parametros pi
+	p1->Value = g->año_academico;
+	p2->Value = g->nivel;
+
+	//Paso los Valores a la Base de Datos
+	comm->Parameters->Add(p1);
+	comm->Parameters->Add(p2);
+
+	//Paso 3: Ejecución de la sentencia
+	comm->ExecuteNonQuery();
+	//Paso 4: Cerramos la conexión con la BD
+	conn->Close();
+}
+void GradoDB::Update(Grado^ g){
+	//Paso 1: Obtener la conexión
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "UPDATE GRADE " +
+		"SET year=@p1, level=@p2 " +
+		"WHERE id=@p3";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p2 = gcnew SqlParameter("@p2",
+		System::Data::SqlDbType::VarChar);
+	SqlParameter^ p3 = gcnew SqlParameter("@p3",
+		System::Data::SqlDbType::Int);
+
+	//Le paso los valores del objeto Salon a los parametros pi
+	p1->Value = g->año_academico;
+	p2->Value = g->nivel;
+	p3->Value = g->id;
+
+	//Paso los Valores a la Base de Datos
+	comm->Parameters->Add(p1);
+	comm->Parameters->Add(p2);
+	comm->Parameters->Add(p3);
+
+	//Paso 3: Ejecución de la sentencia
+	comm->ExecuteNonQuery();
+	//Paso 4: Cerramos la conexión con la BD
+	conn->Close();
+}
+void GradoDB::Delete(int id){
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "DELETE FROM GRADE " +
+		"WHERE id=@p1";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+
+	p1->Value = id;
+	comm->Parameters->Add(p1);
+
+	//Paso 3: Ejecución de la sentencia
+	comm->ExecuteNonQuery();
+	//Paso 4: Cerramos la conexión con la BD
+	conn->Close();
+}
+Grado^ GradoDB::QueryById(int id){
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "SELECT * FROM GRADE " +
+		"WHERE id=@p1";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+	p1->Value = id;
+	comm->Parameters->Add(p1);
+
+	//Paso 3: Ejecución de la sentencia
+	SqlDataReader^ dr = comm->ExecuteReader();
+	//Paso 3.1: Procesamos los resultados	
+	Grado ^g = nullptr;
+	if (dr->Read()){
+		g = gcnew Grado();
+		g->id = (int)dr["id"];
+		if (dr["year"] != System::DBNull::Value)
+			g->año_academico = (int)dr["year"];
+		if (dr["level"] != System::DBNull::Value)
+			g->nivel = safe_cast<String ^>(dr["level"]);
+	}
+	//Paso 4: Cerramos el dataReader y la conexión con la BD
+	dr->Close();
+	conn->Close();
+	return g;
+}
+List<Grado^>^ GradoDB::QueryAll(){
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "SELECT * FROM GRADE";
+
+	//Paso 3: Ejecución de la sentencia
+	SqlDataReader^ dr = comm->ExecuteReader();
+	//Paso 3.1: Procesamos los resultados
+	List<Grado^>^ GradoList = gcnew List<Grado^>();
+	while (dr->Read()){
+		Grado^g = gcnew Grado();
+		g->id = (int)dr["id"];
+		if (dr["year"] != System::DBNull::Value)
+			g->año_academico = (int)dr["year"];
+		if (dr["level"] != System::DBNull::Value)
+			g->nivel = safe_cast<String ^>(dr["level"]);
+
+		GradoList->Add(g);
+	}
+	//Paso 4: Cerramos el dataReader y la conexión con la BD
+	dr->Close();
+	conn->Close();
+	return GradoList;
+}
+//////////////////////////////// Fin Metodos de la Clase GradoDB  /////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////// Metodos de la Clase SeccionDB  //////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void SeccionDB::Add(Grado^ g, Seccion^ s){
+	//Paso 1: Obtener la conexión
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "INSERT INTO SECTION " +
+		"(idGrade, year, level, idSection, idClassroom) VALUES (@p1,@p2,@p3,@p4,@p5)";
+	SqlParameter^ p1= gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p2 = gcnew SqlParameter("@p2",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p3 = gcnew SqlParameter("@p3",
+		System::Data::SqlDbType::VarChar);
+	SqlParameter^ p4 = gcnew SqlParameter("@p4",
+		System::Data::SqlDbType::Char, 1);
+	SqlParameter^ p5 = gcnew SqlParameter("@p5",
+		System::Data::SqlDbType::Int);
+
+	//Le paso los valores del objeto Salon a los parametros pi
+	p1->Value = g->id;
+	p2->Value = g->año_academico;
+	p3->Value = g->nivel;
+	p4->Value = gcnew String(s->nombre, 1); //A,B
+	p5->Value = s->salon->id;
+
+	//Paso los Valores a la Base de Datos
+	comm->Parameters->Add(p1);
+	comm->Parameters->Add(p2);
+	comm->Parameters->Add(p3);
+	comm->Parameters->Add(p4);
+	comm->Parameters->Add(p5);
+	//Paso 3: Ejecución de la sentencia
+	comm->ExecuteNonQuery();
+	//Paso 4: Cerramos la conexión con la BD
+	conn->Close();
+}
+void SeccionDB::Update(Grado^ g, Seccion^ s){
+	//Paso 1: Obtener la conexión
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "UPDATE SECTION " + 
+		"SET idGrade=@p1, year=@p2, level=@p3, idClassroom=@p4 " +
+		"WHERE idSection=@p5";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p2 = gcnew SqlParameter("@p2",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p3 = gcnew SqlParameter("@p3",
+		System::Data::SqlDbType::VarChar);
+	SqlParameter^ p4 = gcnew SqlParameter("@p4",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p5 = gcnew SqlParameter("@p5",
+		System::Data::SqlDbType::Char, 1);
+
+	//Le paso los valores del objeto Salon a los parametros pi
+	p1->Value = g->id;
+	p2->Value = g->año_academico;
+	p3->Value = g->nivel;
+	p4->Value = s->salon->id;
+	p5->Value = gcnew String(s->nombre, 1); //A,B
+
+	//Paso los Valores a la Base de Datos
+	comm->Parameters->Add(p1);
+	comm->Parameters->Add(p2);
+	comm->Parameters->Add(p3);
+	comm->Parameters->Add(p4);
+	comm->Parameters->Add(p5);
+	//Paso 3: Ejecución de la sentencia
+	comm->ExecuteNonQuery();
+	//Paso 4: Cerramos la conexión con la BD
+	conn->Close();
+}
+void SeccionDB::Delete(char idSection){
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "DELETE FROM SECTION " +
+		"WHERE idSection=@p1";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Char, 1);
+
+	p1->Value = gcnew String(idSection, 1); //A,B
+	comm->Parameters->Add(p1);
+
+	//Paso 3: Ejecución de la sentencia
+	comm->ExecuteNonQuery();
+	//Paso 4: Cerramos la conexión con la BD
+	conn->Close();
+}
+Seccion^ SeccionDB::QueryById(char idSection){
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "SELECT * FROM SECTION " +
+		"WHERE idSection=@p1";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Char, 1);
+	p1->Value = gcnew String(idSection, 1); //A,B
+	comm->Parameters->Add(p1);
+
+	//Paso 3: Ejecución de la sentencia
+	SqlDataReader^ dr = comm->ExecuteReader();
+	//Paso 3.1: Procesamos los resultados	
+	Seccion ^s = nullptr;
+	if (dr->Read()){
+		s = gcnew Seccion();
+		s->salon = gcnew Salon();
+		if (dr["idSection"] != System::DBNull::Value)
+			s->nombre = safe_cast<String ^>(dr["idSection"])[0];
+		if (dr["idClassroom"] != System::DBNull::Value)
+			s->salon->id = (int)dr["idClassroom"];
+	}
+	//Paso 4: Cerramos el dataReader y la conexión con la BD
+	dr->Close();
+	conn->Close();
+	return s;
+}
+List<Seccion^>^ SeccionDB::QueryAllByGrado(Grado^ g){
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "SELECT * FROM SECTION " + 
+		"WHERE idGrade=@p1 AND year=@p2 AND level=@p3";
+	SqlParameter^ p1 = gcnew SqlParameter("@p1",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p2 = gcnew SqlParameter("@p2",
+		System::Data::SqlDbType::Int);
+	SqlParameter^ p3 = gcnew SqlParameter("@p3",
+		System::Data::SqlDbType::VarChar);
+	p1->Value = g->id;
+	p2->Value = g->año_academico;
+	p3->Value = g->nivel;
+	comm->Parameters->Add(p1);
+	comm->Parameters->Add(p2);
+	comm->Parameters->Add(p3);
+
+	//Paso 3: Ejecución de la sentencia
+	SqlDataReader^ dr = comm->ExecuteReader();
+	//Paso 3.1: Procesamos los resultados
+	List<Seccion^>^ SeccionesList = gcnew List<Seccion^>();
+	while (dr->Read()){
+		Seccion^s = gcnew Seccion();
+		s->salon = gcnew Salon();
+		if (dr["idSection"] != System::DBNull::Value)
+			s->nombre = safe_cast<String ^>(dr["idSection"])[0];
+		if (dr["idClassroom"] != System::DBNull::Value)
+			s->salon->id = (int)dr["idClassroom"];
+		SeccionesList->Add(s);
+	}
+	//Paso 4: Cerramos el dataReader y la conexión con la BD
+	dr->Close();
+	conn->Close();
+	return SeccionesList;
+}
+List<Seccion^>^ SeccionDB::QueryAll(){
+	SqlConnection^ conn;
+	conn = gcnew SqlConnection();
+	conn->ConnectionString = "Server=inti.lab.inf.pucp.edu.pe;" +
+		"Database=inf237;User ID=inf237;Password=inf237db;";
+	conn->Open();
+	//Paso 2: Preparamos la sentencia
+	SqlCommand^ comm = gcnew SqlCommand();
+	comm->Connection = conn;
+	comm->CommandText = "SELECT * FROM SECTION";
+
+	//Paso 3: Ejecución de la sentencia
+	SqlDataReader^ dr = comm->ExecuteReader();
+	//Paso 3.1: Procesamos los resultados
+	List<Seccion^>^ SeccionesList = gcnew List<Seccion^>();
+	while (dr->Read()){
+		Seccion^s = gcnew Seccion();
+		s->salon = gcnew Salon();
+		if (dr["idSection"] != System::DBNull::Value)
+			s->nombre = safe_cast<String ^>(dr["idSection"])[0];
+		if (dr["idClassroom"] != System::DBNull::Value)
+			s->salon->id = (int)dr["idClassroom"];
+		SeccionesList->Add(s);
+	}
+	//Paso 4: Cerramos el dataReader y la conexión con la BD
+	dr->Close();
+	conn->Close();
+	return SeccionesList;
+}
+//////////////////////////////// Fin Metodos de la Clase SeccionDB  /////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// Metodos Estaticos de la Clase SICOLManager  ///////////////////////////////////////////////
 //////////////// Metodos Estaticos para la Clase AlumnoDB dentro de la Clase SICOLManager //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -808,11 +1177,46 @@ void SICOLManager::AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion){
 	salones->AddAlumnoBySeccion(a, grado, seccion);
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////// Metodos Estaticos para la Clase GradoDB dentro de la Clase SICOLManager //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void SICOLManager::AddGrado(Grado^ g){
+	grados->Add(g);
+}
+void SICOLManager::UpdateGrado(Grado^ g){
+	grados->Update(g);
+}
+void SICOLManager::DeleteGrado(int id){
+	grados->Delete(id);
+}
+Grado^ SICOLManager::QueryGradoById(int id){
+	return grados->QueryById(id);
+}
+List<Grado^>^ SICOLManager::QueryAllGrados(){
+	return grados->QueryAll();
+}
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////// Metodos Estaticos para la Clase GradoDB dentro de la Clase SICOLManager //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void SICOLManager::AddSeccion(Grado^ g, Seccion^ s){
+	secciones->Add(g, s);
+}
+void SICOLManager::UpdateSeccion(Grado^ g, Seccion^ s){
+	secciones->Update(g, s);
+}
+void SICOLManager::DeleteSeccion(char idSection){
+	secciones->Delete(idSection);
+}
+Seccion^ SICOLManager::QuerySeccionById(char idSection){
+	return  secciones->QueryById(idSection);
+}
+List<Seccion^>^ SICOLManager::QueryAllSeccionByGrado(Grado^ g){
+	return  secciones->QueryAllByGrado(g);
+}
+List<Seccion^>^ SICOLManager::QueryAllSeccion(){
+	return  secciones->QueryAll();
+}
 
 
 

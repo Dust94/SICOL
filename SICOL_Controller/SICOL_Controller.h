@@ -33,11 +33,34 @@ namespace SICOL_Controller {
 			void AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion);  //seccion = A,B char DB
 	};
 
+	public ref class GradoDB{
+		public:
+			List<Grado^>^ listGrados;
+		public:
+			void Add(Grado^ g);
+			void Update(Grado^ g);
+			void Delete(int id);
+			Grado^ QueryById(int id);
+			List<Grado^>^ QueryAll();
+	};
+	public ref class SeccionDB{
+		public:
+			List<Seccion^>^ listSecciones;
+		public:
+			void Add(Grado^ g, Seccion^ s);
+			void Update(Grado^ g, Seccion^ s);
+			void Delete(char idSection);
+			Seccion^ QueryById(char idSection);
+			List<Seccion^>^ QueryAllByGrado(Grado^ g);
+			List<Seccion^>^ QueryAll();
+	};
 
 	public ref class SICOLManager {
 		private:
 			static AlumnoDB^ Alumnos = gcnew AlumnoDB();
 			static SalonDB^ salones = gcnew SalonDB();
+			static GradoDB^ grados = gcnew GradoDB();
+			static SeccionDB^ secciones = gcnew SeccionDB();
 		public:
 			//Metodos Estaticos de para AlumnoDB 
 			void static AddAlumno(Alumno^ a);
@@ -59,6 +82,21 @@ namespace SICOL_Controller {
 			static List<Salon^>^ QueryAllSalones();
 			static List<Salon^>^ QueryAllSalonesByCapicidad(int capacidad); //Busca los salones con capacidad menor o igual a "capacidad"
 			static void AddAlumnoBySeccion(Alumno^ a, Grado^grado, Seccion^ seccion);
+
+			//Metodos Estaticos de para GradoDB 
+			static void AddGrado(Grado^ g);
+			static void UpdateGrado(Grado^ g);
+			static void DeleteGrado(int id);
+			static Grado^ QueryGradoById(int id);
+			static List<Grado^>^ QueryAllGrados();
+
+			//Metodos Estaticos de para SeccionDB 
+			static void AddSeccion(Grado^ g, Seccion^ s);
+			static void UpdateSeccion(Grado^ g, Seccion^ s);
+			static void DeleteSeccion(char idSection);
+			static Seccion^ QuerySeccionById(char idSection);
+			static List<Seccion^>^ QueryAllSeccionByGrado(Grado^ g);
+			static List<Seccion^>^ QueryAllSeccion();
 	};
 
 	public ref class GradoManager {

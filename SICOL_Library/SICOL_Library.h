@@ -43,25 +43,6 @@ namespace SICOL_Library {
 			String^ UniversidadOrig;
 	}; // Fin Clase Profesor
 
-	public ref class Seccion //A, B, C, D
-	{
-		public:
-			int id;
-			String^ nombre; //A, B, C, D
-			String^ salon; //Nombre del Salon 1 a 1
-			List<Alumno^>^ Alumnos; //Alumnos que estudiaran en una Seccion
-	}; // Fin Clase Seccion
-
-	public ref class Grado // 1°, 2°, etc
-	{
-		public:
-			int id;	//identificador de Grado
-			int numero; //número de grado 1°, 2°, etc
-			int año_academico; //Year DB. 1 .Solo me interesan numeros enteros(años).
-			String^ nivel; //level DB. Primaria o Secundaria  "level" en el DB				
-			List<Seccion^>^ Secciones; //Todas las secciones de un Grado. Ejem: 1A, 1B, 1C, 1D
-	}; // Fin Clase Grado
-
 	public ref class Salon // A106, A108, etc. Relacion de 1 a 1 (Seccion - Salon)
 	{
 		public:
@@ -75,4 +56,25 @@ namespace SICOL_Library {
 			char proyector; //Yes(Y),No(N)
 			char wifi; //Yes(Y),No(N)
 	}; // Fin Clase Salon
+
+	public ref class Seccion //A, B, C, D
+	{
+		public:
+			int id;
+			char nombre; //A, B, C, D. identificador idSection en DB
+			Salon^ salon; //Nombre del Salon 1 a 1
+			List<Alumno^>^ Alumnos; //Alumnos que estudiaran en una Seccion
+	}; // Fin Clase Seccion
+
+	public ref class Grado // 1°, 2°, etc
+	{
+		public:
+			int id;	//identificador de Grado
+			int numero; //número de grado 1°, 2°, etc
+			int año_academico; //Year DB. 1 .Solo me interesan numeros enteros(años).
+			String^ nivel; //level DB. Primaria o Secundaria  "level" en el DB				
+			List<Seccion^>^ Secciones; //Todas las secciones de un Grado. Ejem: 1A, 1B, 1C, 1D
+	}; // Fin Clase Grado
+
+	
 }
